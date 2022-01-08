@@ -46,7 +46,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	if rErr != nil {
 		log.Fatalf("bad response : %+v", rErr)
 	}
-	// resp := " hi"
+	
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Success!!",
 			"status": http.StatusOK,
