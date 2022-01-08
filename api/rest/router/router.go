@@ -19,10 +19,18 @@ func Router(r *gin.Engine) *gin.Engine {
 
 	/* Routes */
 	inventory := r.Group("inventory")
+	checkout := r.Group("checkout")
+
 	inventoryAPI := controller.NewInventoryAPI()
+	checkoutAPI := controller.NewCheckoutAPI()
 
 	{
+		/* INVENTORY API */
 		inventory.GET("", inventoryAPI.GetAllInventories)
+
+
+		/* CHECKOUT API */
+		checkout.POST("", checkoutAPI.Checkout)
 	}
 
 	return r

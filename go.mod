@@ -3,9 +3,10 @@ module github.com/ZAF07/tigerlily-e-bakery-api-gateway
 go 1.17
 
 require (
-	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220107141530-d52acf5f7a96
+	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220108095307-044aae484239
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
+	github.com/jinzhu/gorm v1.9.16
 	google.golang.org/grpc v1.43.0
 )
 
@@ -15,8 +16,10 @@ require (
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.5.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.9 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
+	github.com/lib/pq v1.1.1 // indirect
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742 // indirect

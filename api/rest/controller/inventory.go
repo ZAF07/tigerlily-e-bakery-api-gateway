@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
@@ -23,11 +24,24 @@ func NewInventoryAPI() *InventoryApi {
 }
 
 func (controller InventoryApi) GetAllInventories(c *gin.Context) {
-		// Create a connection instance and Dial the GRPC server
+
+	// Parse the request data
+	limit, limitErr := strconv.Atoi(c.Query("limit"))
+	if limitErr != nil {
+		controller.logs.ErrorLogger.Printf("[CONTROLLER] Error converting limit param into integer : +%v", limitErr)
+		log.Fatalf("[CONTROLLER] Error converting limit param into integer : %+v", limitErr)
+	}
+	offset, offsetErr := strconv.Atoi(c.Query("offset"))
+	if offsetErr != nil {
+		controller.logs.ErrorLogger.Printf("[CONTROLLER] Error converting offset param into integer : %+v", offsetErr)
+		log.Fatalf("Error converting offset params into integer :%v", offsetErr)
+	}
+
+	// Create a connection instance and Dial the GRPC server
 	var conn *grpc.ClientConn
-	conn, err := grpc.Dial(":8000", grpc.WithInsecure())
-	if err != nil {
-		log.Fatalf("cannot connect to GRPC client : %+v", err)
+	conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
+	if connErr != nil {
+		log.Fatalf("cannot connect to GRPC client : %+v", connErr)
 	}
 	defer conn.Close()
 
@@ -36,9 +50,11 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 
 	// Construct the request body to pass in GRPC Service method
 	req := &rpc.GetAllInventoriesReq{
-	Limit: 10,
-	Offset: 0,
+	Limit: int32(limit),
+	Offset: int32(offset),
 	}
+
+	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	ctx := context.Background()
 
 	// Invoke the GRPC Service method and wait for response (Unary)
@@ -46,7 +62,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	if rErr != nil {
 		log.Fatalf("bad response : %+v", rErr)
 	}
-	
+
 		c.JSON(http.StatusOK, gin.H{
 			"message": "Success!!",
 			"status": http.StatusOK,
