@@ -1,6 +1,5 @@
 # tigerlily-e-bakery-api-gateway
 
-<p>API Gateway to all services available in tigerlily bakery</p>
-<br>
-<h2>System Design</h2>
-![erd-glints-test](https://user-images.githubusercontent.com/61228520/148627754-880f3513-5190-4d06-8566-8d10f0c8f661.png)
+API Gateway to all services available in tigerlily bakery
+
+![system design](https://user-images.githubusercontent.com/61228520/148627782-61206386-9490-4c89-a002-55a7651db1f7.png)
