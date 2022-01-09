@@ -39,7 +39,7 @@ func (a CheckoutAPI) Checkout(c *gin.Context) {
 	var conn * grpc.ClientConn
 
 	// Dial the GRPC SERVER
-	conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
+	conn, connErr := grpc.Dial(":8001", grpc.WithInsecure())
 	if connErr != nil {
 		a.logs.ErrorLogger.Printf("[CONTROLLER] Error dialing GRPC server : %+v", connErr)
 	}
