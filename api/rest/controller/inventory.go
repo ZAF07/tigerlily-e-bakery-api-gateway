@@ -56,6 +56,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 			"status": http.StatusInternalServerError,
 			"data": "",
 		})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

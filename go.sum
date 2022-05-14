@@ -4,6 +4,8 @@ github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220109054924-9ff8b7dd32c4 h1:xSiZfee1dgVKlOy1/D3WWD2anpH599bqSnyAw5VJ44g=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220109054924-9ff8b7dd32c4/go.mod h1:FeQs6nzhuv+6ID92CSBGabVAm5D/fIW3dY+fuMHHeew=
+github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514101732-bfd5f4cadaf6 h1:TkmuV1rYHBJ2OYuga6EtnRJ8W2hwDnZTbz9ngghZnlk=
+github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514101732-bfd5f4cadaf6/go.mod h1:FeQs6nzhuv+6ID92CSBGabVAm5D/fIW3dY+fuMHHeew=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220401120126-2b5504bb3ba0 h1:C2T/NCFjz+/ximIY2+yi74ez6Jz14jwFZxJkNbAieaw=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220401120126-2b5504bb3ba0/go.mod h1:RA/9bral9WI3fhwRy3dLnS9ELlLfkgtALv7u7FVU+4A=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514073401-bbe5cd571ba2 h1:PMRXIGwE6WoaLlTMsLuD5YoAL88M28ypx/OESMQloa4=
