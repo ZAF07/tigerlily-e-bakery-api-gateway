@@ -3,8 +3,8 @@ module github.com/ZAF07/tigerlily-e-bakery-api-gateway
 go 1.17
 
 require (
-	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514101732-bfd5f4cadaf6
-	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514073401-bbe5cd571ba2
+	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514173249-a9fe8efff012
+	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514170206-40860cfcdf63
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
 	google.golang.org/grpc v1.43.0
