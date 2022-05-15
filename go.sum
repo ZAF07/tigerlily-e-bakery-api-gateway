@@ -18,6 +18,8 @@ github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514170206-40860cfcdf63 h
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514170206-40860cfcdf63/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515081607-1c20f48885a8 h1:NKlHaSHxXmTqcxgrJ3we1RrnZ5aWZ+cH8Zg7A34L2xM=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515081607-1c20f48885a8/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515083608-618cae1ec322 h1:3XK04/iDNDvEzUycFqb11NznTBMMqcqxpCAxltRwkGg=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515083608-618cae1ec322/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=

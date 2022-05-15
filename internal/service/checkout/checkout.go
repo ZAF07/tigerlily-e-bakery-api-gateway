@@ -31,7 +31,7 @@ func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (
 
 	checkoutService := rpc.NewCheckoutServiceClient(conn)
 	
-	resp, err = checkoutService.Checkout(ctx, req)
+	resp, err = checkoutService.StripeCheckoutSession(ctx, req)
 	if err != nil {
 		srv.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)
 
