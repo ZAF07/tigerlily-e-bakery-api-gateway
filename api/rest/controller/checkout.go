@@ -6,7 +6,7 @@ import (
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/checkout"
-	rpc "github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc/proto"
+	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
 	"github.com/gin-gonic/gin"
 )
 

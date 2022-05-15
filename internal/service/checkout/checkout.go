@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	rpc "github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc/proto"
+	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
 	"google.golang.org/grpc"
 )
 

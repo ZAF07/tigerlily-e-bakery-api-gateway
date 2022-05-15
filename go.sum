@@ -8,12 +8,16 @@ github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514101732-bfd5f4cada
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514101732-bfd5f4cadaf6/go.mod h1:FeQs6nzhuv+6ID92CSBGabVAm5D/fIW3dY+fuMHHeew=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514173249-a9fe8efff012 h1:6fSXBtbXHgywH+2oVRy8+8wZgYTDdcXPAF9HQpzKKVk=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220514173249-a9fe8efff012/go.mod h1:rfOqJSvAT07bEQbF98npdPfMh9jP7/AAv6IJvB9cTfk=
+github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515081652-1384b4bb14a2 h1:kldQ2ZqgCV8aSE1wHgseEbVxmGmY06nBn4xzg7slJbw=
+github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515081652-1384b4bb14a2/go.mod h1:rfOqJSvAT07bEQbF98npdPfMh9jP7/AAv6IJvB9cTfk=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220401120126-2b5504bb3ba0 h1:C2T/NCFjz+/ximIY2+yi74ez6Jz14jwFZxJkNbAieaw=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220401120126-2b5504bb3ba0/go.mod h1:RA/9bral9WI3fhwRy3dLnS9ELlLfkgtALv7u7FVU+4A=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514073401-bbe5cd571ba2 h1:PMRXIGwE6WoaLlTMsLuD5YoAL88M28ypx/OESMQloa4=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514073401-bbe5cd571ba2/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514170206-40860cfcdf63 h1:l6rGhyqLHHig0e3kk+V479f7IGOmfri6PTdYXTRFPhI=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220514170206-40860cfcdf63/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515081607-1c20f48885a8 h1:NKlHaSHxXmTqcxgrJ3we1RrnZ5aWZ+cH8Zg7A34L2xM=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515081607-1c20f48885a8/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
