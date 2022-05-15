@@ -2,11 +2,12 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/checkout"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/strategy"
 	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
 	"github.com/gin-gonic/gin"
 )
@@ -32,12 +33,27 @@ func (a CheckoutAPI) Checkout(c *gin.Context) {
 	if err != nil {
 		a.logs.ErrorLogger.Printf("error binding req struct : %+v", err)
 	}
-	fmt.Printf("CONTROLLER : %+v", req)
+	
+	if req.PaymentType == "" {
+		c.JSON(http.StatusBadRequest, 
+		gin.H{
+			"message": "Missing payment type",
+			"status": http.StatusBadRequest,
+		})
+		return 
+	}
+
 	ctx := context.Background()
-	
-	// Initialise a new service instance
-	service := checkout.NewCheckoutService()
-	
+
+	var service checkout.CheckoutService
+	switch req.PaymentType {
+	case constants.STRIPE_CHECKOUT_SESSION:
+		// Initialise a new service instance
+		service = *checkout.NewCheckoutService(strategy.NewStripeBasicStrategy())
+	case constants.TEST_STRATEGY:
+		service = *checkout.NewCheckoutService(strategy.NewTestStrategy())
+	}
+
 	resp, err := service.Checkout(ctx, req)
 	if err != nil {
 		a.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)

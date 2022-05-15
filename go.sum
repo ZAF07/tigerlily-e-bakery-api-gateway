@@ -12,6 +12,10 @@ github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515102949-08acd89fc616 h
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515102949-08acd89fc616/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515103019-8469d64649c2 h1:Km3h33ivUKVbCiEDTcz5HAQyP6LkQREbG3/0Hof2EQA=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515103019-8469d64649c2/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515163210-f9006d76cd04 h1:u7MX/uuJilDlOCBHwv2KVQ6tJtgvP7Bm2/ccu+x1yPQ=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515163210-f9006d76cd04/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515163747-4aae36ddc280 h1:0Ge8ZF6TIJh1wAyD0PkwAPWO+1OWhnfn6v+EF9RBj0Q=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515163747-4aae36ddc280/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=

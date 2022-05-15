@@ -3,19 +3,21 @@ package checkout
 import (
 	"context"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/strategy"
 	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
 	"google.golang.org/grpc"
 )
 
 type CheckoutService struct {
 	logs logger.Logger
+	strategy strategy.Strategy
 }
 
-func NewCheckoutService() *CheckoutService {
+func NewCheckoutService(s strategy.Strategy) *CheckoutService {
 	return &CheckoutService{
 		logs: *logger.NewLogger(),
+		strategy: s,
 	}
 }
 
@@ -30,25 +32,21 @@ func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (
 	}
 	defer conn.Close()
 	
-	// CONTINUE IMPLEMENTATION OF STRATEGY PATTERN FOR PAYMENTS
+	GRPCcheckoutService := rpc.NewCheckoutServiceClient(conn)
+	resp, err = srv.strategy.Checkout(ctx, req, GRPCcheckoutService)
+	if err != nil {
+		srv.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)
 
-	switch req.PaymentType {
-	case constants.STRIPE_CHECKOUT_SESSION:
-			checkoutService := rpc.NewCheckoutServiceClient(conn)
-			resp, err = checkoutService.StripeCheckoutSession(ctx, req)
-			if err != nil {
-				srv.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)
-		
-				resp = &rpc.CheckoutResp{
-					Success: false,
-				}
-				return		
-			}
-			return
+		resp = &rpc.CheckoutResp{
+			Success: false,
+		}
+		return		
 	}
+
 	resp = &rpc.CheckoutResp{
-		Success: false,
-		Message: "Missing checkout payment provider, Please specify a payment provider",
+		Success: true,
+		Message: "Checkout Success",
+		StatusUrl: resp.StatusUrl,
 	}
 	return
 }
