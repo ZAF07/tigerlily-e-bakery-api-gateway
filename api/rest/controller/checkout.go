@@ -27,17 +27,16 @@ func (a CheckoutAPI) Checkout(c *gin.Context) {
 	a.logs.InfoLogger.Println("[CONTROLLER] Checkout API running")
 
 	var req *rpc.CheckoutReq
-
 	err := c.ShouldBindJSON(&req)
 	if err != nil {
 		a.logs.ErrorLogger.Printf("error binding req struct : %+v", err)
 	}
 	
 	ctx := context.Background()
-
+	
 	// Initialise a new service instance
 	service := checkout.NewCheckoutService()
-
+	
 	resp, err := service.Checkout(ctx, req)
 	if err != nil {
 		a.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)
