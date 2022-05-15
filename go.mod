@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515092641-6f6f9b398853
-	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515091627-cd0504cfd2cf
+	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515095122-df86e692e1c1
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
 	google.golang.org/grpc v1.46.2

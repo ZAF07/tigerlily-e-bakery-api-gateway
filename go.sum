@@ -2,14 +2,12 @@ cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
-github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515081652-1384b4bb14a2 h1:kldQ2ZqgCV8aSE1wHgseEbVxmGmY06nBn4xzg7slJbw=
-github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515081652-1384b4bb14a2/go.mod h1:rfOqJSvAT07bEQbF98npdPfMh9jP7/AAv6IJvB9cTfk=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515092641-6f6f9b398853 h1:fFZbxMqkt3x1tHn0lmgjPhwrzazUHbbGyWwqVrfKzqU=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220515092641-6f6f9b398853/go.mod h1:rfOqJSvAT07bEQbF98npdPfMh9jP7/AAv6IJvB9cTfk=
-github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515084722-9c0c3712d2d5 h1:HPsyEatLVWbyOw7BkvwHaW5IWei+/6h2VD6HCDSUmSA=
-github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515084722-9c0c3712d2d5/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515091627-cd0504cfd2cf h1:w3I5mZgIGgxtm6cnsqDKm7URSnpgwkTJXQTamHvpQaQ=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515091627-cd0504cfd2cf/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515095122-df86e692e1c1 h1:W7PdHhTP7uq2uMJmKTvrpNAPlIyw54mYJXqF5csK8Oc=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515095122-df86e692e1c1/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=

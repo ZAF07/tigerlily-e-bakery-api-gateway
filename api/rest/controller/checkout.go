@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
@@ -31,7 +32,7 @@ func (a CheckoutAPI) Checkout(c *gin.Context) {
 	if err != nil {
 		a.logs.ErrorLogger.Printf("error binding req struct : %+v", err)
 	}
-	
+	fmt.Printf("CONTROLLER : %+v", req)
 	ctx := context.Background()
 	
 	// Initialise a new service instance
@@ -52,7 +53,7 @@ func (a CheckoutAPI) Checkout(c *gin.Context) {
 	
 	c.JSON(http.StatusOK,
 	gin.H{
-		"message": "Success checkout",
+		"message": "Success",
 		"status": http.StatusOK,
 		"data": resp,
 	})

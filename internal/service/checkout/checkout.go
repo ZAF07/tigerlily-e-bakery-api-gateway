@@ -2,6 +2,7 @@ package checkout
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
@@ -33,16 +34,17 @@ func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (
 
 	switch req.PaymentType {
 		case constants.STRIPE_CHECKOUT_SESSION:
+			fmt.Println("RUNIN&&&&&")
 			resp, err = checkoutService.StripeCheckoutSession(ctx, req)
 			if err != nil {
 				srv.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)
 		
-			resp = &rpc.CheckoutResp{
-				Success: false,
+				resp = &rpc.CheckoutResp{
+					Success: false,
+				}
+				return		
 			}
-			return		
-	}
-		
+			return
 	}
 	resp = &rpc.CheckoutResp{
 		Success: false,
