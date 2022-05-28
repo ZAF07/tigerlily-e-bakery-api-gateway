@@ -21,6 +21,7 @@ func NewInventoryService() *InventoryService {
 
 func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetAllInventoriesReq) (resp *rpc.GetAllInventoriesResp, err error) {
 
+	// Asynchronus API implementation
 	// Create a connection instance and Dial the GRPC server
 	var conn *grpc.ClientConn
 	conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
@@ -37,6 +38,6 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 	if err != nil {
 		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC server : %+v", err)
 	}
-	
-	return 
+
+	return
 }

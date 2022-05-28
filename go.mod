@@ -7,6 +7,7 @@ require (
 	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515163747-4aae36ddc280
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
+	github.com/gorilla/websocket v1.5.0
 	google.golang.org/grpc v1.46.2
 )
 
