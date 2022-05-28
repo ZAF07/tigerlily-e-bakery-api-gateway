@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -66,4 +67,13 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 		"status":  http.StatusOK,
 		"data":    resp,
 	})
+}
+
+func (controller InventoryApi) GetAllInventoriesSync(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Done %s", "Sync request")
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"message": "Synchronus",
+	// 	"status":  http.StatusOK,
+	// 	"data":    "Websocket",
+	// })
 }

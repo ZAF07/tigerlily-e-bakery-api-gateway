@@ -8,6 +8,7 @@ require (
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
 	github.com/gorilla/websocket v1.5.0
+	github.com/soheilhy/cmux v0.1.5
 	google.golang.org/grpc v1.46.2
 )
 

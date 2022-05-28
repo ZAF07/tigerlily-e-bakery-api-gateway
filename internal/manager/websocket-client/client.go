@@ -2,6 +2,7 @@ package client
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -34,6 +35,9 @@ var (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
+	CheckOrigin: func(r *http.Request) bool {
+		return checkOrigin(r)
+	},
 }
 
 // Client is a middleman between the websocket connection and the hub.
@@ -63,7 +67,9 @@ func (c *Client) ReadPump() {
 	c.Conn.SetReadDeadline(time.Now().Add(pongWait))
 	c.Conn.SetPongHandler(func(string) error { c.Conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
-		// Client's message/data entry point (websocket method)
+		// INIT DB/CACHE CALL HERE TO FETCH/UPDATE LATEST INVENTORY STATUS
+
+		// Client's message/data ENTRY POINT (websocket method)
 		_, message, err := c.Conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
@@ -72,6 +78,10 @@ func (c *Client) ReadPump() {
 			// This loop only breaks when there is an error
 			break
 		}
+
+		// Call the needed methods to recalculate inventory items and return
+		log.Println("This is the incomming message ---> ", string(message))
+
 		// Format the message/data and broadcast to hub to send to all active clients
 		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.Hub.Broadcast <- message
@@ -154,4 +164,25 @@ func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 	// new goroutines.
 	go client.WritePump()
 	go client.ReadPump()
+}
+
+func checkOrigin(r *http.Request) bool {
+	// Validate token
+	token := r.URL.Query()
+	if g, ok := token["token"]; ok {
+		authToken := g[0]
+		err := validateToken(authToken)
+		if err != nil {
+			return false
+		}
+	}
+	return true
+}
+
+func validateToken(t string) error {
+	if t != "1234" {
+		log.Printf("Token %s does not match %s", t, "1234")
+		return errors.New("invalid token")
+	}
+	return nil
 }

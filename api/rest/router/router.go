@@ -7,15 +7,14 @@ import (
 )
 
 func Router(r *gin.Engine) *gin.Engine {
-		// Set CORS config
+	// Set CORS config
 	r.Use(cors.New(cors.Config{
 		AllowCredentials: false,
-		AllowAllOrigins: true,
+		AllowAllOrigins:  true,
 		// AllowOrigins: []string{"http://localhost:3000"},
 		AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTION", "HEAD", "PATCH", "COMMON"},
 		AllowHeaders: []string{"Content-Type", "Content-Length", "Authorization", "accept", "origin", "Referer", "User-Agent"},
 	}))
-
 
 	/* Routes */
 	inventory := r.Group("inventory")
@@ -27,11 +26,11 @@ func Router(r *gin.Engine) *gin.Engine {
 	{
 		/* INVENTORY API */
 		inventory.GET("", inventoryAPI.GetAllInventories)
-
+		// inventory.GET("/ws", inventoryAPI.GetAllInventories)
 
 		/* CHECKOUT API */
 		checkout.POST("", checkoutAPI.Checkout)
 	}
 
 	return r
-} 
+}

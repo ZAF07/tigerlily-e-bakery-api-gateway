@@ -4,7 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/hub"
+	wsClient "github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/websocket-client"
+
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 )
 
@@ -20,8 +21,11 @@ func NewSyncInventoryService() *SyncInventoryService {
 
 func WatchInventory(ctx context.Context) {
 
+	// hub := wsClient.NewHub()
+	// go hub.Run()
+	// serveWs(hub, )
 }
 
-func serveWs(hub *hub.Hub, w http.ResponseWriter, r *http.Request) {
+func serveWs(hub *wsClient.Hub, w http.ResponseWriter, r *http.Request) {
 	return
 }
