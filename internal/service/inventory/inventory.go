@@ -5,9 +5,10 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
-	"google.golang.org/grpc"
 )
 
 type InventoryService struct {
@@ -22,22 +23,11 @@ func NewInventoryService(h *Hub) *InventoryService {
 	}
 }
 
+// GetAllInventories is the standard HTTP protocol service handler
 func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetAllInventoriesReq) (resp *rpc.GetAllInventoriesResp, err error) {
 
-	// Asynchronus API implementation
-	// Create a connection instance and Dial the GRPC server
-	var conn *grpc.ClientConn
-	conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
-	if connErr != nil {
-		srv.logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server")
-		log.Fatalf("cannot connect to GRPC server : %+v", connErr)
-	}
-	defer conn.Close()
-
-	// Initialises a new GRPC client service stub
-	inventoryService := rpc.NewInventoryServiceClient(conn)
-
-	resp, err = inventoryService.GetAllInventories(ctx, req)
+	grpcClient := grpc_client.NewGRPCClient(constants.GET_INVENTORIES, req)
+	resp, err = grpcClient.Strategy.GetAllInventories(ctx, req)
 	if err != nil {
 		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC server : %+v", err)
 	}
@@ -47,14 +37,6 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 
 // serveWs handles websocket requests from the peer.
 func (srv InventoryService) ServeWs(w http.ResponseWriter, r *http.Request) {
-
-	// Should authenticate the request first
-	/*
-		Verify request is coming from a trusted host via r.Header
-		Verify the JWT token given
-	*/
-	log.Println("This is the host: ", r.Header)
-	// log.Println("This is the headers : ", )
 
 	// Here i am upgrading the HTTP connection to a Websocket Protocol connection
 	conn, err := upgrader.Upgrade(w, r, nil)

@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -71,10 +70,8 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	})
 }
 
+// WsInventory is the Websocket protocol service handler
 func (controller InventoryApi) WsInventory(c *gin.Context) {
-	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
 	service := inventory.NewInventoryService(controller.hubb)
-	// hub := inventory.NewHub()
-	// go hub.Run()
 	service.ServeWs(c.Writer, c.Request)
 }

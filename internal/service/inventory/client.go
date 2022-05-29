@@ -1,6 +1,7 @@
 package inventory
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"log"
@@ -65,54 +66,21 @@ func (c *Client) ReadPump() {
 	c.Conn.SetReadDeadline(time.Now().Add(pongWait))
 	c.Conn.SetPongHandler(func(string) error { c.Conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
-		// INIT DB/CACHE CALL HERE TO FETCH/UPDATE LATEST INVENTORY STATUS
 
 		// Client's message/data ENTRY POINT (websocket method)
 		_, message, err := c.Conn.ReadMessage()
 		if err != nil {
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
+				log.Printf("EWHAT 4444444444444444 ; %v", err)
 			}
 			// This loop only breaks when there is an error
 			break
 		}
-
-		// Call the needed methods to recalculate inventory items and return
+		// INIT DB/CACHE CALL HERE TO FETCH/UPDATE LATEST INVENTORY STATUS
 		log.Println("This is the incomming message ---> ", string(message))
-		// action := string(message)
-		// if action == "GET" {
-		// 	// resp := controller.SyncInvent(action)
-		// 	fmt.Printf("RESPONSE --->  %v\n", "resp")
-		// }
-		// req := &rpc.GetAllInventoriesReq{
-		// 	Limit:  0,
-		// 	Offset: 0,
-		// }
-		// var conn *grpc.ClientConn
-		// conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
-		// if connErr != nil {
-		// 	// srv.logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server")
-		// 	log.Fatalf("cannot connect to GRPC server : %+v", connErr)
-		// }
-		// defer conn.Close()
-
-		// // Initialises a new GRPC client service stub
-		// inventoryService := rpc.NewInventoryServiceClient(conn)
-
-		// ctx := context.Background()
-		// resp, err := inventoryService.GetAllInventories(ctx, req)
-		// if err != nil {
-		// 	log.Fatal("wsClient grpc")
-		// 	// srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC server : %+v", err)
-		// }
-		// fmt.Printf("RESPONSE ----> %+v", resp)
-		// a, err := json.Marshal(resp)
-		// if err != nil {
-		// 	log.Fatalf("wsClient grpc error %v", err)
-		// }
-		// c.Hub.Broadcast <- []byte(a)
 		// Format the message/data and broadcast to hub to send to all active clients
-		// message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
+		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.Hub.Broadcast <- message
 	}
 }
