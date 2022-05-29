@@ -2,6 +2,8 @@ package router
 
 import (
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/api/rest/controller"
+
+	i "github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -20,13 +22,16 @@ func Router(r *gin.Engine) *gin.Engine {
 	inventory := r.Group("inventory")
 	checkout := r.Group("checkout")
 
-	inventoryAPI := controller.NewInventoryAPI()
+	hub := i.NewHub()
+	go hub.Run()
+
+	inventoryAPI := controller.NewInventoryAPI(hub)
 	checkoutAPI := controller.NewCheckoutAPI()
 
 	{
 		/* INVENTORY API */
 		inventory.GET("", inventoryAPI.GetAllInventories)
-		// inventory.GET("/ws", inventoryAPI.GetAllInventories)
+		inventory.GET("/ws", inventoryAPI.WsInventory)
 
 		/* CHECKOUT API */
 		checkout.POST("", checkoutAPI.Checkout)

@@ -3,6 +3,7 @@ package inventory
 import (
 	"context"
 	"log"
+	"net/http"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
@@ -11,11 +12,13 @@ import (
 
 type InventoryService struct {
 	logs logger.Logger
+	hubb *Hub
 }
 
-func NewInventoryService() *InventoryService {
+func NewInventoryService(h *Hub) *InventoryService {
 	return &InventoryService{
 		logs: *logger.NewLogger(),
+		hubb: h,
 	}
 }
 
@@ -40,4 +43,33 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 	}
 
 	return
+}
+
+// serveWs handles websocket requests from the peer.
+func (srv InventoryService) ServeWs(w http.ResponseWriter, r *http.Request) {
+
+	// Should authenticate the request first
+	/*
+		Verify request is coming from a trusted host via r.Header
+		Verify the JWT token given
+	*/
+	log.Println("This is the host: ", r.Header)
+	// log.Println("This is the headers : ", )
+
+	// Here i am upgrading the HTTP connection to a Websocket Protocol connection
+	conn, err := upgrader.Upgrade(w, r, nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	// Creating a new client connection data structure
+	client := &Client{Hub: srv.hubb, Conn: conn, Send: make(chan []byte, 256)}
+	// Register a new connection to the hub
+	client.Hub.Register <- client
+
+	// Allow collection of memory referenced by the caller by doing all work in
+	// new goroutines.
+	go client.WritePump()
+	go client.ReadPump()
 }

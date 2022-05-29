@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -15,11 +16,13 @@ import (
 
 type InventoryApi struct {
 	logs logger.Logger
+	hubb *inventory.Hub
 }
 
-func NewInventoryAPI() *InventoryApi {
+func NewInventoryAPI(h *inventory.Hub) *InventoryApi {
 	return &InventoryApi{
 		logs: *logger.NewLogger(),
+		hubb: h,
 	}
 }
 
@@ -48,7 +51,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	ctx := context.Background()
 
-	service := inventory.NewInventoryService()
+	service := inventory.NewInventoryService(inventory.NewHub())
 
 	resp, err := service.GetAllInventories(ctx, req)
 	if err != nil {
@@ -66,4 +69,12 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 		"status":  http.StatusOK,
 		"data":    resp,
 	})
+}
+
+func (controller InventoryApi) WsInventory(c *gin.Context) {
+	fmt.Println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+	service := inventory.NewInventoryService(controller.hubb)
+	// hub := inventory.NewHub()
+	// go hub.Run()
+	service.ServeWs(c.Writer, c.Request)
 }

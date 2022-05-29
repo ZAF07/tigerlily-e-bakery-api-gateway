@@ -1,8 +1,6 @@
-package client
+package inventory
 
 import (
-	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -11,9 +9,6 @@ import (
 
 	// "websocket-go/manager/hub"
 	"github.com/gorilla/websocket"
-	"google.golang.org/grpc"
-
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
 )
 
 const (
@@ -84,42 +79,41 @@ func (c *Client) ReadPump() {
 
 		// Call the needed methods to recalculate inventory items and return
 		log.Println("This is the incomming message ---> ", string(message))
-		action := string(message)
-		if action == "GET" {
-			// resp := controller.SyncInvent(action)
-			fmt.Printf("RESPONSE --->  %v\n", "resp")
-		}
-		req := &rpc.GetAllInventoriesReq{
-			Limit:  0,
-			Offset: 0,
-		}
-		var conn *grpc.ClientConn
-		conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
-		if connErr != nil {
-			// srv.logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server")
-			log.Fatalf("cannot connect to GRPC server : %+v", connErr)
-		}
-		defer conn.Close()
+		// action := string(message)
+		// if action == "GET" {
+		// 	// resp := controller.SyncInvent(action)
+		// 	fmt.Printf("RESPONSE --->  %v\n", "resp")
+		// }
+		// req := &rpc.GetAllInventoriesReq{
+		// 	Limit:  0,
+		// 	Offset: 0,
+		// }
+		// var conn *grpc.ClientConn
+		// conn, connErr := grpc.Dial(":8000", grpc.WithInsecure())
+		// if connErr != nil {
+		// 	// srv.logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server")
+		// 	log.Fatalf("cannot connect to GRPC server : %+v", connErr)
+		// }
+		// defer conn.Close()
 
-		//  TAKE A LOOK AT THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		// Initialises a new GRPC client service stub
-		inventoryService := rpc.NewInventoryServiceClient(conn)
+		// // Initialises a new GRPC client service stub
+		// inventoryService := rpc.NewInventoryServiceClient(conn)
 
-		ctx := context.Background()
-		resp, err := inventoryService.GetAllInventories(ctx, req)
-		if err != nil {
-			log.Fatal("wsClient grpc")
-			// srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC server : %+v", err)
-		}
-		fmt.Printf("RESPONSE ----> %+v", resp)
-		a, err := json.Marshal(resp)
-		if err != nil {
-			log.Fatalf("wsClient grpc error %v", err)
-		}
-		c.Hub.Broadcast <- []byte(a)
+		// ctx := context.Background()
+		// resp, err := inventoryService.GetAllInventories(ctx, req)
+		// if err != nil {
+		// 	log.Fatal("wsClient grpc")
+		// 	// srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC server : %+v", err)
+		// }
+		// fmt.Printf("RESPONSE ----> %+v", resp)
+		// a, err := json.Marshal(resp)
+		// if err != nil {
+		// 	log.Fatalf("wsClient grpc error %v", err)
+		// }
+		// c.Hub.Broadcast <- []byte(a)
 		// Format the message/data and broadcast to hub to send to all active clients
 		// message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
-		// c.Hub.Broadcast <- message
+		c.Hub.Broadcast <- message
 	}
 }
 
@@ -173,33 +167,33 @@ func (c *Client) WritePump() {
 }
 
 // serveWs handles websocket requests from the peer.
-func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
+// func ServeWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
 
-	// Should authenticate the request first
-	/*
-		Verify request is coming from a trusted host via r.Header
-		Verify the JWT token given
-	*/
-	log.Println("This is the host: ", r.Header)
-	// log.Println("This is the headers : ", )
+// 	// Should authenticate the request first
+// 	/*
+// 		Verify request is coming from a trusted host via r.Header
+// 		Verify the JWT token given
+// 	*/
+// 	log.Println("This is the host: ", r.Header)
+// 	// log.Println("This is the headers : ", )
 
-	// Here i am upgrading the HTTP connection to a Websocket Protocol connection
-	conn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println(err)
-		return
-	}
+// 	// Here i am upgrading the HTTP connection to a Websocket Protocol connection
+// 	conn, err := upgrader.Upgrade(w, r, nil)
+// 	if err != nil {
+// 		log.Println(err)
+// 		return
+// 	}
 
-	// Creating a new client connection data structure
-	client := &Client{Hub: hub, Conn: conn, Send: make(chan []byte, 256)}
-	// Register a new connection to the hub
-	client.Hub.Register <- client
+// 	// Creating a new client connection data structure
+// 	client := &Client{Hub: hub, Conn: conn, Send: make(chan []byte, 256)}
+// 	// Register a new connection to the hub
+// 	client.Hub.Register <- client
 
-	// Allow collection of memory referenced by the caller by doing all work in
-	// new goroutines.
-	go client.WritePump()
-	go client.ReadPump()
-}
+// 	// Allow collection of memory referenced by the caller by doing all work in
+// 	// new goroutines.
+// 	go client.WritePump()
+// 	go client.ReadPump()
+// }
 
 func checkOrigin(r *http.Request) bool {
 	// Validate token

@@ -19,15 +19,15 @@ func main() {
 	l, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		fmt.Println("Something went wrong in the server startup")
-		log.Fatalf("Error connecting tcp port 8000")
+		log.Fatalf("Error connecting tcp port 8080")
 	}
 
 	// Start a new multiplexer passing in the main server
 	m := cmux.New(l)
-	wslistener := m.Match(cmux.Any())
 	httpListener := m.Match(cmux.HTTP1Fast())
+	// wslistener := m.Match(cmux.Any())
 
-	go serveWebsocket(wslistener)
+	// go serveWebsocket(wslistener)
 	go serveHTTP(httpListener)
 
 	if err := m.Serve(); !strings.Contains(err.Error(), "use of closed network connection") {
