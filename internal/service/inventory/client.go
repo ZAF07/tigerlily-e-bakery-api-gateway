@@ -1,7 +1,6 @@
 package inventory
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"log"
@@ -9,6 +8,7 @@ import (
 	"time"
 
 	// "websocket-go/manager/hub"
+
 	"github.com/gorilla/websocket"
 )
 
@@ -67,20 +67,23 @@ func (c *Client) ReadPump() {
 	c.Conn.SetPongHandler(func(string) error { c.Conn.SetReadDeadline(time.Now().Add(pongWait)); return nil })
 	for {
 
+		// TECH DEBT: Might need to receive actual JSON as payload. JSON.stringify in FE might not reflect nil values !!!
+
 		// Client's message/data ENTRY POINT (websocket method)
 		_, message, err := c.Conn.ReadMessage()
 		if err != nil {
+			log.Printf("ERROR IN WEBSOCKET CLIENT : %v", err)
 			if websocket.IsUnexpectedCloseError(err, websocket.CloseGoingAway, websocket.CloseAbnormalClosure) {
 				log.Printf("error: %v", err)
-				log.Printf("EWHAT 4444444444444444 ; %v", err)
 			}
 			// This loop only breaks when there is an error
 			break
 		}
+
 		// INIT DB/CACHE CALL HERE TO FETCH/UPDATE LATEST INVENTORY STATUS
-		log.Println("This is the incomming message ---> ", string(message))
+		// log.Println("This is the incomming message ---> ", string(message))
 		// Format the message/data and broadcast to hub to send to all active clients
-		message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
+		// message = bytes.TrimSpace(bytes.Replace(message, newline, space, -1))
 		c.Hub.Broadcast <- message
 	}
 }
