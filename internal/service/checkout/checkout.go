@@ -10,28 +10,28 @@ import (
 )
 
 type CheckoutService struct {
-	logs logger.Logger
+	logs     logger.Logger
 	strategy strategy.Strategy
 }
 
 func NewCheckoutService(s strategy.Strategy) *CheckoutService {
 	return &CheckoutService{
-		logs: *logger.NewLogger(),
+		logs:     *logger.NewLogger(),
 		strategy: s,
 	}
 }
 
 func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (resp *rpc.CheckoutResp, err error) {
 	// Initialise a GRPC Server
-	var conn * grpc.ClientConn
-	
+	var conn *grpc.ClientConn
+
 	// Dial the GRPC SERVER
 	conn, connErr := grpc.Dial(":8001", grpc.WithInsecure())
 	if connErr != nil {
 		srv.logs.ErrorLogger.Printf("[CONTROLLER] Error dialing GRPC server : %+v", connErr)
 	}
 	defer conn.Close()
-	
+
 	GRPCcheckoutService := rpc.NewCheckoutServiceClient(conn)
 	resp, err = srv.strategy.Checkout(ctx, req, GRPCcheckoutService)
 	if err != nil {
@@ -40,12 +40,12 @@ func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (
 		resp = &rpc.CheckoutResp{
 			Success: false,
 		}
-		return		
+		return
 	}
 
 	resp = &rpc.CheckoutResp{
-		Success: true,
-		Message: "Checkout Success",
+		Success:   true,
+		Message:   "Checkout Success",
 		StatusUrl: resp.StatusUrl,
 	}
 	return
