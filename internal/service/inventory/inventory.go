@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/helper"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
@@ -16,6 +17,10 @@ type InventoryService struct {
 	hubb *Hub
 }
 
+/*
+	TODO:
+	Create another NewInventoryService W/O a hub
+*/
 func NewInventoryService(h *Hub) *InventoryService {
 	return &InventoryService{
 		logs: *logger.NewLogger(),
@@ -26,10 +31,16 @@ func NewInventoryService(h *Hub) *InventoryService {
 // GetAllInventories is the standard HTTP protocol service handler
 func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetAllInventoriesReq) (resp *rpc.GetAllInventoriesResp, err error) {
 
-	grpcClient := grpc_client.NewGRPCClient(constants.GET_INVENTORIES, req)
-	resp, err = grpcClient.Strategy.GetAllInventories(ctx, req)
+	grpcClient := grpc_client.NewGRPCClient(constants.INVENTORY_SERVICE)
+	res, grpcErr := grpcClient.Strategy.Execute(ctx, constants.GET_INVENTORIES, req)
+	if grpcErr != nil {
+		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC via strategy : %+v", grpcErr)
+		return nil, grpcErr
+	}
+
+	resp, err = helper.TransformInventoryGetResp(res)
 	if err != nil {
-		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC server : %+v", err)
+		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting transforming response to proper format : %+v", err)
 	}
 
 	return

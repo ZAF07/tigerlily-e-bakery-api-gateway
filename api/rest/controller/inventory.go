@@ -39,8 +39,6 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 		log.Fatalf("Error converting offset params into integer :%v", offsetErr)
 	}
 
-	// Check if request is synchronus or asynchronus (is synchronus, use websocket, else GRPC)
-
 	// Construct the request body to pass in GRPC Service method
 	req := &rpc.GetAllInventoriesReq{
 		Limit:  int32(limit),
@@ -48,6 +46,11 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	}
 
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
+	/*
+		TODO:
+		Refactor to use context cancel if request fails in propagation
+	*/
+
 	ctx := context.Background()
 
 	service := inventory.NewInventoryService(inventory.NewHub())
