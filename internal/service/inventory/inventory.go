@@ -56,7 +56,7 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 	return
 }
 
-// serveWs handles websocket requests from the peer.
+// ServeWs handles websocket requests from the peer. Upgrades protocol to websocket
 func (srv InventoryService) ServeWs(w http.ResponseWriter, r *http.Request) {
 
 	// Here i am upgrading the HTTP connection to a Websocket Protocol connection
