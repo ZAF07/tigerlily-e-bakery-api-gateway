@@ -15,6 +15,7 @@ type CheckoutService struct {
 	logs       logger.Logger
 }
 
+// Inits a new CheckoutService instance ...
 func NewCheckoutService(grpc *grpc_client.GRPCClient) *CheckoutService {
 	return &CheckoutService{
 		logs:       *logger.NewLogger(),
@@ -22,6 +23,7 @@ func NewCheckoutService(grpc *grpc_client.GRPCClient) *CheckoutService {
 	}
 }
 
+// Checkout method for CheckoutService. Inits a new GRPC clien and invokes strategy algo based on payment type...
 func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (resp *rpc.CheckoutResp, err error) {
 	defer srv.GRPCClient.Conn.Close()
 
