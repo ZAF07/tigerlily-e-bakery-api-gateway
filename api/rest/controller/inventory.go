@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
@@ -52,8 +53,8 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	*/
 
 	ctx := context.Background()
-
-	service := inventory.NewInventoryService(inventory.NewHub())
+	grpcClient := grpc_client.NewGRPCClient()
+	service := inventory.NewInventoryService(inventory.NewHub(), grpcClient)
 
 	resp, err := service.GetAllInventories(ctx, req)
 	if err != nil {
@@ -75,6 +76,6 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 
 // WsInventory is the Websocket protocol service handler
 func (controller InventoryApi) WsInventory(c *gin.Context) {
-	service := inventory.NewInventoryService(controller.hubb)
+	service := inventory.NewInventoryService(controller.hubb, &grpc_client.GRPCClient{})
 	service.ServeWs(c.Writer, c.Request)
 }
