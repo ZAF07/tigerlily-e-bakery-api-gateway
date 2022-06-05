@@ -33,6 +33,20 @@ func main() {
 	}
 }
 
+func serveHTTP(l net.Listener) {
+	h := gin.Default()
+	router.Router(h)
+	s := &http.Server{
+		Handler: h,
+	}
+	if err := s.Serve(l); err != cmux.ErrListenerClosed {
+		log.Fatalf("error serving HTTP : %+v", err)
+	}
+	logs := logger.NewLogger()
+	logs.InfoLogger.Println("Started HTTP Server...")
+	fmt.Println("HTTP Server Started ...")
+}
+
 //  NOT USED
 // func serveWebsocket(l net.Listener) {
 // 	// Initialise a new Websocket Client && start a go routine to listen for any events specifeid (Look in the hub.Run() for more details)
@@ -57,16 +71,3 @@ func main() {
 // }
 
 // HTTP Server initialisation (using gin)
-func serveHTTP(l net.Listener) {
-	h := gin.Default()
-	router.Router(h)
-	s := &http.Server{
-		Handler: h,
-	}
-	if err := s.Serve(l); err != cmux.ErrListenerClosed {
-		log.Fatalf("error serving HTTP : %+v", err)
-	}
-	logs := logger.NewLogger()
-	logs.InfoLogger.Println("Started HTTP Server...")
-	fmt.Println("HTTP Server Started ...")
-}
