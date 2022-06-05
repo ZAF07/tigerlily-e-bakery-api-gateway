@@ -14,6 +14,7 @@ type GRPCClient struct {
 	Conn     *grpc.ClientConn
 }
 
+// Returns a new instance of GRPCClient{}
 func NewGRPCClient() *GRPCClient {
 	var conn *grpc.ClientConn
 	conn, connErr := grpc.Dial(":8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
@@ -28,9 +29,10 @@ func NewGRPCClient() *GRPCClient {
 	}
 }
 
-func (g *GRPCClient) SetStrategy(_type string, conn *grpc.ClientConn) {
+// Sets GRPCClient.Strategy()...
+func (g *GRPCClient) SetStrategy(_type string) {
 	switch _type {
 	case constants.INVENTORY_SERVICE:
-		g.Strategy = NewGRPCInventoryClient(conn)
+		g.Strategy = NewGRPCInventoryClient(g.Conn)
 	}
 }

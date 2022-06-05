@@ -19,6 +19,7 @@ type InventoryApi struct {
 	hubb *inventory.Hub
 }
 
+// Returns a new instance of InventoryAPI{}
 func NewInventoryAPI(h *inventory.Hub) *InventoryApi {
 	return &InventoryApi{
 		logs: *logger.NewLogger(),
@@ -26,6 +27,7 @@ func NewInventoryAPI(h *inventory.Hub) *InventoryApi {
 	}
 }
 
+// Handler for GET domain/inventory
 func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 
 	// Parse the request data
