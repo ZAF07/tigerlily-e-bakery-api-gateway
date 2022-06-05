@@ -35,7 +35,7 @@ func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient) *InventoryService
 // GetAllInventories is the standard HTTP protocol service handler
 func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetAllInventoriesReq) (resp *rpc.GetAllInventoriesResp, err error) {
 
-	srv.GRPCClient.SetStrategy(constants.INVENTORY_SERVICE)
+	srv.GRPCClient.SetStrategy(grpc_client.NewGRPCInventoryClient(srv.GRPCClient.Conn))
 	res, resErr := srv.GRPCClient.Strategy.Execute(ctx, constants.GET_INVENTORIES, req)
 	if resErr != nil {
 		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC via strategy : %+v", resErr)

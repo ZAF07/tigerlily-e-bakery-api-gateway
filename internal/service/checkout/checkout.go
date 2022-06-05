@@ -2,47 +2,40 @@ package checkout
 
 import (
 	"context"
+	"fmt"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/helper"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/strategy"
 	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
-	"google.golang.org/grpc"
 )
 
 type CheckoutService struct {
-	logs     logger.Logger
-	strategy strategy.Strategy
+	GRPCClient *grpc_client.GRPCClient
+	logs       logger.Logger
 }
 
-func NewCheckoutService(s strategy.Strategy) *CheckoutService {
+func NewCheckoutService(grpc *grpc_client.GRPCClient) *CheckoutService {
 	return &CheckoutService{
-		logs:     *logger.NewLogger(),
-		strategy: s,
+		logs:       *logger.NewLogger(),
+		GRPCClient: grpc,
 	}
 }
 
 func (srv CheckoutService) Checkout(ctx context.Context, req *rpc.CheckoutReq) (resp *rpc.CheckoutResp, err error) {
-	// Initialise a GRPC Server
-	var conn *grpc.ClientConn
+	defer srv.GRPCClient.Conn.Close()
 
-	// Dial the GRPC SERVER
-	conn, connErr := grpc.Dial(":8001", grpc.WithInsecure())
-	if connErr != nil {
-		srv.logs.ErrorLogger.Printf("[CONTROLLER] Error dialing GRPC server : %+v", connErr)
+	srv.GRPCClient.SetStrategy(grpc_client.NewGRPCCheckoutClient(srv.GRPCClient.Conn))
+	res, resErr := srv.GRPCClient.Strategy.Execute(ctx, req.PaymentType, req)
+	if resErr != nil {
+		srv.logs.ErrorLogger.Printf("[SERVICE] Error getting response from RPC via strategy : %+v\n", resErr)
+		return nil, resErr
 	}
-	defer conn.Close()
-
-	GRPCcheckoutService := rpc.NewCheckoutServiceClient(conn)
-	resp, err = srv.strategy.Checkout(ctx, req, GRPCcheckoutService)
+	fmt.Println("CHECKOUT SERVICE BEFORE TRANSFORMING")
+	resp, err = helper.TransformCheckoutresp(res)
 	if err != nil {
-		srv.logs.ErrorLogger.Printf("[CONTROLLER] Bad response from GRPC. Don't forget to add enums proto for error codes : %+v", err)
-
-		resp = &rpc.CheckoutResp{
-			Success: false,
-		}
-		return
+		srv.logs.ErrorLogger.Printf("[SERVICE] Error transforming response to proper format for checkout service: %+v\n", err)
 	}
-
 	resp = &rpc.CheckoutResp{
 		Success:   true,
 		Message:   "Checkout Success",

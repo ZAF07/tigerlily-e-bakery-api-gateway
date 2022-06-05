@@ -3,7 +3,6 @@ package grpc_client
 import (
 	"log"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -15,9 +14,9 @@ type GRPCClient struct {
 }
 
 // Returns a new instance of GRPCClient{}
-func NewGRPCClient() *GRPCClient {
+func NewGRPCClient(port string) *GRPCClient {
 	var conn *grpc.ClientConn
-	conn, connErr := grpc.Dial(":8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, connErr := grpc.Dial(port, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if connErr != nil {
 		logs := logger.NewLogger()
 		logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server")
@@ -30,9 +29,6 @@ func NewGRPCClient() *GRPCClient {
 }
 
 // Sets GRPCClient.Strategy()...
-func (g *GRPCClient) SetStrategy(_type string) {
-	switch _type {
-	case constants.INVENTORY_SERVICE:
-		g.Strategy = NewGRPCInventoryClient(g.Conn)
-	}
+func (g *GRPCClient) SetStrategy(s GRPCClientInterface) {
+	g.Strategy = s
 }

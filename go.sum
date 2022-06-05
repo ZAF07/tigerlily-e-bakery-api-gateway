@@ -51,10 +51,10 @@ github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0
 github.com/Masterminds/sprig/v3 v3.2.2/go.mod h1:UoaO7Yp8KlPnJIYWTFkMaqPUYKTfGFPhxNuwnnxkKlk=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
-github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220529065343-77ee55624ec1 h1:jzuKLKQgxG0A4/9HlKhKKYIT5QdrLZYmF3YlQ3JRAc8=
-github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220529065343-77ee55624ec1/go.mod h1:YdrbVYipUYPRfyX3Hruqx4E8OswM00Tfp49CG/vtSNM=
-github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515171115-ee1a8d353c66 h1:Ae+IK/lofoVrPSFNqkexKRghy158hiFcsbrK4fxEyyQ=
-github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220515171115-ee1a8d353c66/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
+github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220605094618-8e3d00024450 h1:grtekgfvnlLRymYwkqK/PPL+yZaEOXImcGv3JzprX9o=
+github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220605094618-8e3d00024450/go.mod h1:YdrbVYipUYPRfyX3Hruqx4E8OswM00Tfp49CG/vtSNM=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220605135033-76e09c33b9b9 h1:HfL8doOqHU8Yj0S+dbJ1ogsQEsi9KyPeTDfF9521Bs0=
+github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220605135033-76e09c33b9b9/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/andybalholm/cascadia v1.1.0/go.mod h1:GsXiBklL0woXo1j/WYWtSYYC4ouU9PqHO0sqidkEA4Y=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/apmckinlay/gsuneido v0.0.0-20180907175622-1f10244968e3/go.mod h1:hJnaqxrCRgMCTWtpNz9XUFkBCREiQdlcyK6YNmOfroM=

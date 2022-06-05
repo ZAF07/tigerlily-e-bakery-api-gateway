@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
@@ -47,6 +48,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 		Limit:  int32(limit),
 		Offset: int32(offset),
 	}
+	controller.logs.InfoLogger.Printf("[CONTROLLER] Received GET Inventories request with these params : %+v\n", req)
 
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	/*
@@ -55,7 +57,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	*/
 
 	ctx := context.Background()
-	grpcClient := grpc_client.NewGRPCClient()
+	grpcClient := grpc_client.NewGRPCClient(constants.INVENTORY_PORT)
 	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient)
 
 	resp, err := service.GetAllInventories(ctx, req)
