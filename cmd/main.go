@@ -33,6 +33,10 @@ func main() {
 	}
 }
 
+/*
+	TODO:
+		SET UP READ/WRITE TIMEOUT
+*/
 func serveHTTP(l net.Listener) {
 	h := gin.Default()
 	router.Router(h)
