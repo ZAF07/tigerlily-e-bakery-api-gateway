@@ -16,7 +16,7 @@ type GRPCCheckoutClient struct {
 	Client rpc.CheckoutServiceClient
 }
 
-// Returns a new instance of GRPCInventoryClient{}...
+// Returns a new instance of GRPCCheckoutClient{}...
 func NewGRPCCheckoutClient(conn *grpc.ClientConn) *GRPCCheckoutClient {
 	return &GRPCCheckoutClient{
 		conn:   conn,
@@ -35,6 +35,7 @@ func (g GRPCCheckoutClient) Execute(ctx context.Context, _type, req interface{})
 	return
 }
 
+// Stripe Checkout method for GRPC Checkout Client...
 func (g GRPCCheckoutClient) stripeCheckoutSession(ctx context.Context, req interface{}) (resp *rpc.CheckoutResp, err error) {
 	defer g.conn.Close()
 
@@ -50,6 +51,7 @@ func (g GRPCCheckoutClient) stripeCheckoutSession(ctx context.Context, req inter
 	return
 }
 
+// Custom method for GRPC Checkout Client...
 func (g GRPCCheckoutClient) customCheckout(ctx context.Context, req interface{}) (resp *rpc.CheckoutResp, err error) {
 	defer g.conn.Close()
 
