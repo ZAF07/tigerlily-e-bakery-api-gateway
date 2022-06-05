@@ -54,7 +54,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 
 	ctx := context.Background()
 	grpcClient := grpc_client.NewGRPCClient()
-	service := inventory.NewInventoryService(inventory.NewHub(), grpcClient)
+	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient)
 
 	resp, err := service.GetAllInventories(ctx, req)
 	if err != nil {
