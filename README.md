@@ -11,3 +11,7 @@ API Gateway to all services available in tigerlily bakery
 <h2>User Flow Diagram</h2>
 
 ![Tigerlily Project (1)](https://user-images.githubusercontent.com/61228520/171108925-ee16476a-a3d5-4ac0-9a4a-278455a95f93.png)
+
+<h2>Flow of user sending a checkout request</h2>
+
+![Tigerlily Project (3)](https://user-images.githubusercontent.com/61228520/172862392-11337251-5633-4f9b-9855-4aa5cc552f90.png)
