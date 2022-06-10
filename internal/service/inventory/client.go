@@ -23,12 +23,12 @@ const (
 	pingPeriod = (pongWait * 9) / 10
 
 	// Maximum message size allowed from peer.
-	maxMessageSize = 1024
+	maxMessageSize = 110024
 )
 
 var (
 	newline = []byte{'\n'}
-	space   = []byte{' '}
+	// space   = []byte{' '}
 )
 
 var upgrader = websocket.Upgrader{
@@ -79,7 +79,6 @@ func (c *Client) ReadPump() {
 			// This loop only breaks when there is an error
 			break
 		}
-
 		// INIT DB/CACHE CALL HERE TO FETCH/UPDATE LATEST INVENTORY STATUS
 		// log.Println("This is the incomming message ---> ", string(message))
 		// Format the message/data and broadcast to hub to send to all active clients
@@ -111,11 +110,10 @@ func (c *Client) WritePump() {
 				return
 			}
 
-			w, err := c.Conn.NextWriter(websocket.TextMessage)
+			w, err := c.Conn.NextWriter(websocket.BinaryMessage)
 			if err != nil {
 				return
 			}
-
 			w.Write(message)
 
 			// Add queued chat messages to the current websocket message.
