@@ -22,6 +22,7 @@ func Router(r *gin.Engine) *gin.Engine {
 	inventory := r.Group("inventory")
 	checkout := r.Group("checkout")
 
+	// ❌ TODO: This could be moved to main.go
 	hub := i.NewHub()
 	go hub.Run()
 
