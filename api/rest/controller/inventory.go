@@ -52,7 +52,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 		Limit:  int32(limit),
 		Offset: int32(offset),
 	}
-	controller.logs.InfoLogger.Printf("[CONTROLLER] Received GET Inventories request with these params : %+v\n", req)
+	controller.logs.InfoLogger.Printf("[CONTROLLER] Received GET Inventories request with these params Limit: %+v Offset: %+v\n", req.Limit, req.Offset)
 
 	/*
 		TODO:
