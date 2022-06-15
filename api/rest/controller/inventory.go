@@ -6,11 +6,13 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/cache"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/go-redis/redis/v9"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,6 +20,7 @@ import (
 type InventoryApi struct {
 	logs logger.Logger
 	hubb *inventory.Hub
+	rdb  *redis.Client
 }
 
 // Returns a new instance of InventoryAPI{}
@@ -25,6 +28,7 @@ func NewInventoryAPI(h *inventory.Hub) *InventoryApi {
 	return &InventoryApi{
 		logs: *logger.NewLogger(),
 		hubb: h,
+		rdb:  cache.NewRedisCache(),
 	}
 }
 
@@ -57,7 +61,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	ctx := context.Background()
 	grpcClient := grpc_client.NewGRPCClient(constants.INVENTORY_PORT)
-	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient)
+	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient, controller.rdb)
 
 	resp, err := service.GetAllInventories(ctx, req)
 	if err != nil {
@@ -79,6 +83,6 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 
 // WsInventory is the Websocket protocol service handler
 func (controller InventoryApi) WsInventory(c *gin.Context) {
-	service := inventory.NewInventoryService(controller.hubb, &grpc_client.GRPCClient{})
+	service := inventory.NewInventoryService(controller.hubb, &grpc_client.GRPCClient{}, controller.rdb)
 	service.ServeWs(c.Writer, c.Request)
 }

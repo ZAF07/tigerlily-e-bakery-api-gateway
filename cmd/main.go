@@ -14,7 +14,6 @@ import (
 )
 
 func main() {
-	fmt.Println("-** API GATEWAY STARTED **-")
 	log := logger.NewLogger()
 
 	l, err := net.Listen("tcp", ":8080")
@@ -31,6 +30,7 @@ func main() {
 	if err := m.Serve(); !strings.Contains(err.Error(), "use of closed network connection") {
 		log.ErrorLogger.Fatalf("MUX ERR : %+v\n", err)
 	}
+	fmt.Println("-** API GATEWAY STARTED **-")
 }
 
 /*
@@ -49,6 +49,10 @@ func serveHTTP(l net.Listener) {
 	logs := logger.NewLogger()
 	logs.InfoLogger.Println("Started HTTP Server...")
 	fmt.Println("HTTP Server Started ...")
+}
+
+func populateCache() {
+
 }
 
 //  NOT USED

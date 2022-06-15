@@ -12,29 +12,33 @@ import (
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/go-redis/redis/v9"
 )
 
 type InventoryService struct {
 	GRPCClient *grpc_client.GRPCClient
 	logs       logger.Logger
 	hubb       *Hub
+	redis      *redis.Client
 }
 
 /*
 	TODO:
 	Create another NewInventoryService W/O a hub
 */
-func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient) *InventoryService {
+func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client) *InventoryService {
 	return &InventoryService{
 		GRPCClient: grpc,
 		logs:       *logger.NewLogger(),
 		hubb:       h,
+		redis:      r,
 	}
 }
 
 // GetAllInventories is the standard HTTP protocol service handler
 func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetAllInventoriesReq) (resp *rpc.GetAllInventoriesResp, err error) {
 
+	// If cache is populated, if so, get items from cache
 	srv.GRPCClient.SetStrategy(grpc_client.NewGRPCInventoryClient(srv.GRPCClient.Conn))
 	res, resErr := srv.GRPCClient.Strategy.Execute(ctx, constants.GET_INVENTORIES, req)
 	if resErr != nil {
