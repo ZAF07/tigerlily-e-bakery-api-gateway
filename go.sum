@@ -51,8 +51,10 @@ github.com/Masterminds/semver/v3 v3.1.1/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0
 github.com/Masterminds/sprig/v3 v3.2.2/go.mod h1:UoaO7Yp8KlPnJIYWTFkMaqPUYKTfGFPhxNuwnnxkKlk=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
 github.com/PuerkitoBio/goquery v1.5.1/go.mod h1:GsLWisAFVj4WgDibEWF4pvYnkVQBpKBKeU+7zCJoLcc=
-github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615155047-e7972928f732 h1:ybYMzw9M7QshRXSpWTd+BEfPAZxxthZv++b05/tBbx0=
-github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615155047-e7972928f732/go.mod h1:SA6o4WIRyDJTik70ZPc2oc+sVGjFKRhJGzcEf6HXCgM=
+github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615171039-24453db60769 h1:hE/4qbk1lb/QtWJY8o67Q2HKMcioZIFVUSu8Pwfrhu4=
+github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615171039-24453db60769/go.mod h1:431QYSbEGpFeTd+uVL1e8hqdpukbORK+Z8aPmbmF4nI=
+github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615172715-563561451fdd h1:V786bSk2pHl6becUD4W8S2W4Td+GlpV1ejU51dCU2KU=
+github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615172715-563561451fdd/go.mod h1:431QYSbEGpFeTd+uVL1e8hqdpukbORK+Z8aPmbmF4nI=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220607055318-f3d989e0148a h1:/yDCoU6xjaW50Jt45BhkaDqPOqCGNG32Dt8kh7s7JOM=
 github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220607055318-f3d989e0148a/go.mod h1:YdrbVYipUYPRfyX3Hruqx4E8OswM00Tfp49CG/vtSNM=
 github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220608040444-6d5bbce44f1d h1:uYnF+uiUoriszXw+uPoQUMPSvunlIkbMygn2sNxrI+g=

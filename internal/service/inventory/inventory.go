@@ -11,6 +11,7 @@ import (
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	rm "github.com/ZAF07/tigerlily-e-bakery-cache/redis-cache-manager"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
 	"github.com/go-redis/redis/v9"
 )
@@ -19,7 +20,7 @@ type InventoryService struct {
 	GRPCClient *grpc_client.GRPCClient
 	logs       logger.Logger
 	hubb       *Hub
-	redis      *redis.Client
+	cache      rm.Redismanager
 }
 
 /*
@@ -31,14 +32,13 @@ func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client) 
 		GRPCClient: grpc,
 		logs:       *logger.NewLogger(),
 		hubb:       h,
-		redis:      r,
+		cache:      rm.NewAdminRedisManager(r),
 	}
 }
 
 // GetAllInventories is the standard HTTP protocol service handler
 func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetAllInventoriesReq) (resp *rpc.GetAllInventoriesResp, err error) {
 
-	// If cache is populated, if so, get items from cache
 	srv.GRPCClient.SetStrategy(grpc_client.NewGRPCInventoryClient(srv.GRPCClient.Conn))
 	res, resErr := srv.GRPCClient.Strategy.Execute(ctx, constants.GET_INVENTORIES, req)
 	if resErr != nil {
@@ -53,6 +53,11 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 
 	// Can use this method to run Notification service later on in checkout service
 	go func() {
+		// If cache is populated, if so, get items from cache
+		if rErr := srv.cache.AddInventories(ctx, resp.Inventories); rErr != nil {
+			srv.logs.ErrorLogger.Printf("Error adding into cache : %+v\n", rErr)
+		}
+		srv.logs.InfoLogger.Println("SUCCESSSSS CACHE!!!!!!!!!!!")
 		time.Sleep(10 * time.Second)
 		fmt.Println("WAKE UP!!!!!!!!!!")
 	}()

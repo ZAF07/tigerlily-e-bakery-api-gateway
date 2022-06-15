@@ -3,7 +3,7 @@ module github.com/ZAF07/tigerlily-e-bakery-api-gateway
 go 1.17
 
 require (
-	github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615155047-e7972928f732
+	github.com/ZAF07/tigerlily-e-bakery-cache v0.0.0-20220615172715-563561451fdd
 	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220607055318-f3d989e0148a
 	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220608040444-6d5bbce44f1d
 	github.com/gin-contrib/cors v1.3.1
