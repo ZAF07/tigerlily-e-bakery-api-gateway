@@ -68,15 +68,36 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 func (srv InventoryService) GetAllInventoriesCache(ctx context.Context) *rpc.GetAllInventoriesResp {
 	items := []*rpc.Sku{}
 	egg := &rpc.Sku{
-		Name: "Egg Tart",
+		Name: "egg pie",
 	}
 	cheese := &rpc.Sku{
-		Name: "Cheese Tart",
+		Name: "egg tart",
 	}
 	lemon := &rpc.Sku{
-		Name: "Lemon Cake",
+		Name: "oreo cake",
 	}
-	items = append(items, egg, cheese, lemon)
+	lemonIce := &rpc.Sku{
+		Name: "lemon Ice Cream",
+	}
+	bun := &rpc.Sku{
+		Name: "cheese bun",
+	}
+	sorbet := &rpc.Sku{
+		Name: "lemon sorbet",
+	}
+	le := &rpc.Sku{
+		Name: "lemon tart",
+	}
+	leo := &rpc.Sku{
+		Name: "cheese pie",
+	}
+	leop := &rpc.Sku{
+		Name: "apple pie",
+	}
+	leoo := &rpc.Sku{
+		Name: "cheese roll",
+	}
+	items = append(items, egg, cheese, lemon, lemonIce, bun, sorbet, le, leo, leop, leoo)
 	resp, err := srv.cache.GetAllInventories(ctx, items)
 	if err != nil {
 		srv.logs.ErrorLogger.Printf(" [SERVICE] Error getting from cache library: %+v\n", err)
