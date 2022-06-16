@@ -33,6 +33,7 @@ func Router(r *gin.Engine) *gin.Engine {
 	{
 		/* INVENTORY API */
 		inventory.GET("", inventoryAPI.GetAllInventories)
+		inventory.GET("/cache", inventoryAPI.GetAllInventoriesCache)
 		inventory.GET("/ws", inventoryAPI.WsInventory)
 
 		/* CHECKOUT API */

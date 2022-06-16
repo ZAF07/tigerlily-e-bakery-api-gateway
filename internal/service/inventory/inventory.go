@@ -65,6 +65,25 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 	return
 }
 
+func (srv InventoryService) GetAllInventoriesCache(ctx context.Context) *rpc.GetAllInventoriesResp {
+	items := []*rpc.Sku{}
+	egg := &rpc.Sku{
+		Name: "Egg Tart",
+	}
+	cheese := &rpc.Sku{
+		Name: "Cheese Tart",
+	}
+	lemon := &rpc.Sku{
+		Name: "Lemon Cake",
+	}
+	items = append(items, egg, cheese, lemon)
+	resp, err := srv.cache.GetAllInventories(ctx, items)
+	if err != nil {
+		srv.logs.ErrorLogger.Printf(" [SERVICE] Error getting from cache library: %+v\n", err)
+	}
+	return resp
+}
+
 // ServeWs handles websocket requests from the peer. Upgrades protocol to websocket
 func (srv InventoryService) ServeWs(w http.ResponseWriter, r *http.Request) {
 

@@ -81,6 +81,20 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	})
 }
 
+func (controller InventoryApi) GetAllInventoriesCache(c *gin.Context) {
+	controller.logs.InfoLogger.Println("Request for GetAllInventoriesCache")
+	service := inventory.NewInventoryService(controller.hubb, grpc_client.NewGRPCClient(constants.INVENTORY_PORT), controller.rdb)
+
+	ctx := context.Background()
+	resp := service.GetAllInventoriesCache(ctx)
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Success from cache",
+		"status":  http.StatusOK,
+		"data":    resp,
+	})
+}
+
 // WsInventory is the Websocket protocol service handler
 func (controller InventoryApi) WsInventory(c *gin.Context) {
 	service := inventory.NewInventoryService(controller.hubb, &grpc_client.GRPCClient{}, controller.rdb)
