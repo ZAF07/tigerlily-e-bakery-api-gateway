@@ -8,6 +8,8 @@ import (
 	"strings"
 
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/api/rest/router"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/command"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/soheilhy/cmux"
@@ -21,11 +23,19 @@ func main() {
 		log.ErrorLogger.Fatalf("[MAIN] Error connecting tcp port 8080: %+v\n", err)
 	}
 
+	// Inject inventories into data file
+	if cliErr := command.InjectInventoriesCmd.Execute(); cliErr != nil {
+		log.ErrorLogger.Fatalf("Error Executing CLI commands : %+v\n", cliErr)
+	}
+
+	// Read inventories from the data file, pass to HTTP goroutine
+	inventoryItems := config.InitInventoryConfig()
+
 	// Start a new multiplexer passing in the main server
 	m := cmux.New(l)
 	httpListener := m.Match(cmux.HTTP1Fast())
 
-	go serveHTTP(httpListener)
+	go serveHTTP(httpListener, inventoryItems)
 
 	if err := m.Serve(); !strings.Contains(err.Error(), "use of closed network connection") {
 		log.ErrorLogger.Fatalf("MUX ERR : %+v\n", err)
@@ -37,9 +47,9 @@ func main() {
 	TODO:
 		SET UP READ/WRITE TIMEOUT
 */
-func serveHTTP(l net.Listener) {
+func serveHTTP(l net.Listener, inventoryItems *config.Inventories) {
 	h := gin.Default()
-	router.Router(h)
+	router.Router(h, inventoryItems)
 	s := &http.Server{
 		Handler: h,
 	}

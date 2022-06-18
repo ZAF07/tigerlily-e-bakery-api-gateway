@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/helper"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
@@ -17,22 +18,24 @@ import (
 )
 
 type InventoryService struct {
-	GRPCClient *grpc_client.GRPCClient
-	logs       logger.Logger
-	hubb       *Hub
-	cache      rm.Redismanager
+	GRPCClient  *grpc_client.GRPCClient
+	logs        logger.Logger
+	hubb        *Hub
+	cache       rm.Redismanager
+	inventories *config.Inventories
 }
 
 /*
 	TODO:
 	Create another NewInventoryService W/O a hub
 */
-func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client) *InventoryService {
+func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client, invs *config.Inventories) *InventoryService {
 	return &InventoryService{
-		GRPCClient: grpc,
-		logs:       *logger.NewLogger(),
-		hubb:       h,
-		cache:      rm.NewAdminRedisManager(r),
+		GRPCClient:  grpc,
+		logs:        *logger.NewLogger(),
+		hubb:        h,
+		cache:       rm.NewAdminRedisManager(r),
+		inventories: invs,
 	}
 }
 
@@ -66,39 +69,9 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 }
 
 func (srv InventoryService) GetAllInventoriesCache(ctx context.Context) *rpc.GetAllInventoriesResp {
-	items := []*rpc.Sku{}
-	egg := &rpc.Sku{
-		Name: "egg pie",
-	}
-	cheese := &rpc.Sku{
-		Name: "egg tart",
-	}
-	lemon := &rpc.Sku{
-		Name: "oreo cake",
-	}
-	lemonIce := &rpc.Sku{
-		Name: "lemon Ice Cream",
-	}
-	bun := &rpc.Sku{
-		Name: "cheese bun",
-	}
-	sorbet := &rpc.Sku{
-		Name: "lemon sorbet",
-	}
-	le := &rpc.Sku{
-		Name: "lemon tart",
-	}
-	leo := &rpc.Sku{
-		Name: "cheese pie",
-	}
-	leop := &rpc.Sku{
-		Name: "apple pie",
-	}
-	leoo := &rpc.Sku{
-		Name: "cheese roll",
-	}
-	items = append(items, egg, cheese, lemon, lemonIce, bun, sorbet, le, leo, leop, leoo)
-	resp, err := srv.cache.GetAllInventories(ctx, items)
+
+	srv.logs.InfoLogger.Println("Current inventory item name in local data file -----> ", srv.inventories.Inventories)
+	resp, err := srv.cache.GetAllInventories(ctx, srv.inventories.Inventories)
 	if err != nil {
 		srv.logs.ErrorLogger.Printf(" [SERVICE] Error getting from cache library: %+v\n", err)
 	}

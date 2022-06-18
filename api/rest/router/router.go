@@ -2,13 +2,16 @@ package router
 
 import (
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/api/rest/controller"
-
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	i "github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
-func Router(r *gin.Engine) *gin.Engine {
+func Router(r *gin.Engine, invs *config.Inventories) *gin.Engine {
+	log := logger.NewLogger()
+	log.InfoLogger.Println("[ROUTER] ROUTER HAS RECEIVED THE IDENTIFIERS OF INVENTORIES", invs)
 	// Set CORS config
 	r.Use(cors.New(cors.Config{
 		AllowCredentials: false,
@@ -27,7 +30,7 @@ func Router(r *gin.Engine) *gin.Engine {
 	hub := i.NewHub()
 	go hub.Run()
 
-	inventoryAPI := controller.NewInventoryAPI(hub)
+	inventoryAPI := controller.NewInventoryAPI(hub, invs)
 	checkoutAPI := controller.NewCheckoutAPI()
 
 	{
