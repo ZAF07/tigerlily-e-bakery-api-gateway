@@ -25,7 +25,7 @@ func InjectInventoryItems(cmd *cobra.Command, args []string) {
 		return
 	}
 	log.InfoLogger.Printf("[COMMAND] These are the args enterd in the cli : %+v\n", args)
-	inventories := config.Inventories{}
+	inventories := config.AppConfig{}
 	for _, v := range args {
 		singleItem := &rpc.Sku{
 			Name: v,

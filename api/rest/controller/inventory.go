@@ -22,11 +22,11 @@ type InventoryApi struct {
 	logs        logger.Logger
 	hubb        *inventory.Hub
 	rdb         *redis.Client
-	Inventories *config.Inventories
+	Inventories *config.AppConfig
 }
 
 // Returns a new instance of InventoryAPI{}
-func NewInventoryAPI(h *inventory.Hub, invs *config.Inventories) *InventoryApi {
+func NewInventoryAPI(h *inventory.Hub, invs *config.AppConfig) *InventoryApi {
 	return &InventoryApi{
 		logs:        *logger.NewLogger(),
 		hubb:        h,
@@ -63,7 +63,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	*/
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	ctx := context.Background()
-	grpcClient := grpc_client.NewGRPCClient(constants.INVENTORY_PORT)
+	grpcClient := grpc_client.NewGRPCClient(controller.Inventories.InventoryServicePort)
 	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient, controller.rdb, controller.Inventories)
 
 	resp, err := service.GetAllInventories(ctx, req)

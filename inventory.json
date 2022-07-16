@@ -1,1 +1,15 @@
-{"Inventories":[{"name":"world"},{"name":"hello"}]}
+{
+  "Inventories":[
+    {
+      "name":"egg tart"
+    },
+    {
+      "name":"cheese pie"
+    },
+    {
+      "name": "lemon tart"
+    }
+  ],
+  "paymentServicePort": ":8001",
+  "InventoryServicePort": ":8000"
+}

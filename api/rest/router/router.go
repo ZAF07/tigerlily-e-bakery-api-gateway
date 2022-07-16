@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Router(r *gin.Engine, invs *config.Inventories) *gin.Engine {
+func Router(r *gin.Engine, invs *config.AppConfig) *gin.Engine {
 	log := logger.NewLogger()
 	log.InfoLogger.Println("[ROUTER] ROUTER HAS RECEIVED THE IDENTIFIERS OF INVENTORIES", invs)
 	// Set CORS config

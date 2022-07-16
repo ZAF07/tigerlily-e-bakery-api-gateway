@@ -22,14 +22,14 @@ type InventoryService struct {
 	logs        logger.Logger
 	hubb        *Hub
 	cache       rm.Redismanager
-	inventories *config.Inventories
+	inventories *config.AppConfig
 }
 
 /*
 	TODO:
 	Create another NewInventoryService W/O a hub
 */
-func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client, invs *config.Inventories) *InventoryService {
+func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client, invs *config.AppConfig) *InventoryService {
 	return &InventoryService{
 		GRPCClient:  grpc,
 		logs:        *logger.NewLogger(),

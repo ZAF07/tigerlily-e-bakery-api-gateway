@@ -47,7 +47,7 @@ func main() {
 	TODO:
 		SET UP READ/WRITE TIMEOUT
 */
-func serveHTTP(l net.Listener, inventoryItems *config.Inventories) {
+func serveHTTP(l net.Listener, inventoryItems *config.AppConfig) {
 	h := gin.Default()
 	router.Router(h, inventoryItems)
 	s := &http.Server{
