@@ -1,1 +1,4 @@
-go run cmd/main.go
+DB_PASSWORD=$1
+DB_USERNAME=$2
+
+go run cmd/main.go $DB_USERNAME $DB_PASSWORD
