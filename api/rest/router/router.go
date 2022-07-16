@@ -9,9 +9,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Router(r *gin.Engine, invs *config.AppConfig) *gin.Engine {
+func Router(r *gin.Engine, appConfig *config.AppConfig) *gin.Engine {
 	log := logger.NewLogger()
-	log.InfoLogger.Println("[ROUTER] ROUTER HAS RECEIVED THE IDENTIFIERS OF INVENTORIES", invs)
+	log.InfoLogger.Println("[ROUTER] ROUTER HAS RECEIVED THE IDENTIFIERS OF INVENTORIES", appConfig)
 	// Set CORS config
 	r.Use(cors.New(cors.Config{
 		AllowCredentials: false,
@@ -30,8 +30,9 @@ func Router(r *gin.Engine, invs *config.AppConfig) *gin.Engine {
 	hub := i.NewHub()
 	go hub.Run()
 
-	inventoryAPI := controller.NewInventoryAPI(hub, invs)
-	checkoutAPI := controller.NewCheckoutAPI()
+	// THIS HAS TO CHANGE TO APPCONFIG NOT INVS
+	inventoryAPI := controller.NewInventoryAPI(hub, appConfig)
+	checkoutAPI := controller.NewCheckoutAPI(appConfig)
 
 	{
 		/* INVENTORY API */

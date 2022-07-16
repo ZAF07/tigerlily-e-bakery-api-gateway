@@ -29,13 +29,13 @@ func main() {
 	}
 
 	// Read inventories from the data file, pass to HTTP goroutine
-	inventoryItems := config.InitInventoryConfig()
+	appConfig := config.InitInventoryConfig()
 
 	// Start a new multiplexer passing in the main server
 	m := cmux.New(l)
 	httpListener := m.Match(cmux.HTTP1Fast())
 
-	go serveHTTP(httpListener, inventoryItems)
+	go serveHTTP(httpListener, appConfig)
 
 	if err := m.Serve(); !strings.Contains(err.Error(), "use of closed network connection") {
 		log.ErrorLogger.Fatalf("MUX ERR : %+v\n", err)
@@ -47,9 +47,9 @@ func main() {
 	TODO:
 		SET UP READ/WRITE TIMEOUT
 */
-func serveHTTP(l net.Listener, inventoryItems *config.AppConfig) {
+func serveHTTP(l net.Listener, appConfig *config.AppConfig) {
 	h := gin.Default()
-	router.Router(h, inventoryItems)
+	router.Router(h, appConfig)
 	s := &http.Server{
 		Handler: h,
 	}

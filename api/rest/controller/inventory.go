@@ -19,19 +19,19 @@ import (
 )
 
 type InventoryApi struct {
-	logs        logger.Logger
-	hubb        *inventory.Hub
-	rdb         *redis.Client
-	Inventories *config.AppConfig
+	logs      logger.Logger
+	hubb      *inventory.Hub
+	rdb       *redis.Client
+	appConfig *config.AppConfig
 }
 
 // Returns a new instance of InventoryAPI{}
 func NewInventoryAPI(h *inventory.Hub, invs *config.AppConfig) *InventoryApi {
 	return &InventoryApi{
-		logs:        *logger.NewLogger(),
-		hubb:        h,
-		rdb:         cache.NewRedisCache(),
-		Inventories: invs,
+		logs:      *logger.NewLogger(),
+		hubb:      h,
+		rdb:       cache.NewRedisCache(),
+		appConfig: invs,
 	}
 }
 
@@ -63,8 +63,8 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	*/
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	ctx := context.Background()
-	grpcClient := grpc_client.NewGRPCClient(controller.Inventories.InventoryServicePort)
-	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient, controller.rdb, controller.Inventories)
+	grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryServicePort)
+	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient, controller.rdb, controller.appConfig)
 
 	resp, err := service.GetAllInventories(ctx, req)
 	if err != nil {
@@ -86,7 +86,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 
 func (controller InventoryApi) GetAllInventoriesCache(c *gin.Context) {
 	controller.logs.InfoLogger.Println("Request for GetAllInventoriesCache")
-	service := inventory.NewInventoryService(controller.hubb, grpc_client.NewGRPCClient(constants.INVENTORY_PORT), controller.rdb, controller.Inventories)
+	service := inventory.NewInventoryService(controller.hubb, grpc_client.NewGRPCClient(constants.INVENTORY_PORT), controller.rdb, controller.appConfig)
 
 	ctx := context.Background()
 	resp := service.GetAllInventoriesCache(ctx)
@@ -100,6 +100,6 @@ func (controller InventoryApi) GetAllInventoriesCache(c *gin.Context) {
 
 // WsInventory is the Websocket protocol service handler
 func (controller InventoryApi) WsInventory(c *gin.Context) {
-	service := inventory.NewInventoryService(controller.hubb, &grpc_client.GRPCClient{}, controller.rdb, controller.Inventories)
+	service := inventory.NewInventoryService(controller.hubb, &grpc_client.GRPCClient{}, controller.rdb, controller.appConfig)
 	service.ServeWs(c.Writer, c.Request)
 }

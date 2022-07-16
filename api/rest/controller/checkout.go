@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
+	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/checkout"
 	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
@@ -13,13 +13,15 @@ import (
 )
 
 type CheckoutAPI struct {
-	logs logger.Logger
+	logs      logger.Logger
+	appConfig *config.AppConfig
 }
 
 // Init the DB here (open a connection to the DB) and pass it along to service and repo layer
-func NewCheckoutAPI() *CheckoutAPI {
+func NewCheckoutAPI(appConfig *config.AppConfig) *CheckoutAPI {
 	return &CheckoutAPI{
-		logs: *logger.NewLogger(),
+		logs:      *logger.NewLogger(),
+		appConfig: appConfig,
 	}
 }
 
@@ -47,7 +49,7 @@ func (a CheckoutAPI) Checkout(c *gin.Context) {
 			Pass a context.Cancel to return as soon as any error occurs
 	*/
 	ctx := context.Background()
-	grpcClient := grpc_client.NewGRPCClient(constants.PAYMENT_PORT)
+	grpcClient := grpc_client.NewGRPCClient(a.appConfig.PaymentServicePort)
 	service := *checkout.NewCheckoutService(grpcClient)
 	resp, err := service.Checkout(ctx, req)
 	if err != nil {
