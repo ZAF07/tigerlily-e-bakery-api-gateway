@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-payment/api/rpc"
 )
 
 // Transforms req into rpc.GetAllInventoriesResp

@@ -8,7 +8,7 @@ import (
 
 	"github.com/Tiger-Coders/tigerlily-bff/config"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 )
 
 var InjectInventoriesCmd = &cobra.Command{

@@ -7,7 +7,7 @@ import (
 	"github.com/Tiger-Coders/tigerlily-bff/internal/helper"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/manager/grpc_client"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-payment/api/rpc"
 )
 
 type CheckoutService struct {

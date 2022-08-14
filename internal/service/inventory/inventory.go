@@ -12,8 +12,8 @@ import (
 	"github.com/Tiger-Coders/tigerlily-bff/internal/manager/grpc_client"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/constants"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
-	rm "github.com/ZAF07/tigerlily-e-bakery-cache/redis-cache-manager"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	rm "github.com/Tiger-Coders/tigerlily-cache/redis-cache-manager"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 	"github.com/go-redis/redis/v9"
 )
 

@@ -6,7 +6,7 @@ import (
 	"github.com/Tiger-Coders/tigerlily-bff/internal/helper"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/constants"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 	"google.golang.org/grpc"
 )
 
