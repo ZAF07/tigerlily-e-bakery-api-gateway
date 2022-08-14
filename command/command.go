@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
 )
 

@@ -6,12 +6,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/cache"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/cache"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/manager/grpc_client"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/constants"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/service/inventory"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
 	"github.com/go-redis/redis/v9"
 

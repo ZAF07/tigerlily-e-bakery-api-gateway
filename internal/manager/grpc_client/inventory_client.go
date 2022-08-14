@@ -3,9 +3,9 @@ package grpc_client
 import (
 	"context"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/helper"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/helper"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/constants"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
 	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
 	"google.golang.org/grpc"
 )

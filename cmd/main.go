@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/api/rest/router"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/command"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/api/rest/router"
+	"github.com/Tiger-Coders/tigerlily-bff/command"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
 	"github.com/gin-gonic/gin"
 	"github.com/soheilhy/cmux"
 )

@@ -1,4 +1,4 @@
-module github.com/ZAF07/tigerlily-e-bakery-api-gateway
+module github.com/Tiger-Coders/tigerlily-bff
 
 go 1.17
 

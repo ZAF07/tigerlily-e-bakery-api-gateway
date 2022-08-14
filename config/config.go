@@ -3,8 +3,8 @@ package config
 import (
 	"fmt"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
