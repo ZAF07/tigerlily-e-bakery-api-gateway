@@ -23,13 +23,14 @@ func main() {
 		log.ErrorLogger.Fatalf("[MAIN] Error connecting tcp port 8080: %+v\n", err)
 	}
 
+	// ❌ NOT USED. THIS CAN BE DELETED. USED THIS TO MANUALLY CREATE A CONFIG FILE FOR INVENTORIES VIA THE CLI
 	// Inject inventories into data file
 	if cliErr := command.InjectInventoriesCmd.Execute(); cliErr != nil {
 		log.ErrorLogger.Fatalf("Error Executing CLI commands : %+v\n", cliErr)
 	}
 
 	// Read inventories from the data file, pass to HTTP goroutine
-	appConfig := config.InitInventoryConfig()
+	appConfig := config.InitAppConfig()
 
 	// Start a new multiplexer passing in the main server
 	m := cmux.New(l)

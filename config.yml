@@ -1,0 +1,2 @@
+paymentServicePort: ":8001"
+inventoryServicePort: ":8000"
