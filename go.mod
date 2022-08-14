@@ -6,8 +6,6 @@ require (
 	github.com/Tiger-Coders/tigerlily-cache v0.0.0-20220814081945-8ad8ef7da798
 	github.com/Tiger-Coders/tigerlily-inventories v0.0.0-20220814075243-eb35f8f3603d
 	github.com/Tiger-Coders/tigerlily-payment v0.0.0-20220814074716-77aca863e5e8
-	github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220607055318-f3d989e0148a
-	github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220608040444-6d5bbce44f1d
 	github.com/fsnotify/fsnotify v1.5.4
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.8.1

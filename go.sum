@@ -44,10 +44,6 @@ github.com/Tiger-Coders/tigerlily-inventories v0.0.0-20220814075243-eb35f8f3603d
 github.com/Tiger-Coders/tigerlily-inventories v0.0.0-20220814075243-eb35f8f3603d/go.mod h1:gqDPMVmW3od2iUpsaAnUSrxmZ8qjbyxeM8EbobwhP5g=
 github.com/Tiger-Coders/tigerlily-payment v0.0.0-20220814074716-77aca863e5e8 h1:OuKcYn2FXXw2nmufIEvf2MAZW1NxAQUE5lfGYQFNr5E=
 github.com/Tiger-Coders/tigerlily-payment v0.0.0-20220814074716-77aca863e5e8/go.mod h1:nDtnkvFfwR+HiXkycYL3H2qbFb4GKKb71BnscGaA268=
-github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220607055318-f3d989e0148a h1:/yDCoU6xjaW50Jt45BhkaDqPOqCGNG32Dt8kh7s7JOM=
-github.com/ZAF07/tigerlily-e-bakery-inventories v0.0.0-20220607055318-f3d989e0148a/go.mod h1:YdrbVYipUYPRfyX3Hruqx4E8OswM00Tfp49CG/vtSNM=
-github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220608040444-6d5bbce44f1d h1:uYnF+uiUoriszXw+uPoQUMPSvunlIkbMygn2sNxrI+g=
-github.com/ZAF07/tigerlily-e-bakery-payment v0.0.0-20220608040444-6d5bbce44f1d/go.mod h1:NjqHOPvireDYMaMT0lg81vZ7zxqlEk+i5IWxzqRn0RA=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
