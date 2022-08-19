@@ -2,6 +2,7 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
@@ -85,6 +86,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 }
 
 func (controller InventoryApi) GetAllInventoriesCache(c *gin.Context) {
+	fmt.Println("YESSSS")
 	controller.logs.InfoLogger.Println("Request for GetAllInventoriesCache")
 	service := inventory.NewInventoryService(controller.hubb, grpc_client.NewGRPCClient(constants.INVENTORY_PORT), controller.rdb, controller.appConfig)
 

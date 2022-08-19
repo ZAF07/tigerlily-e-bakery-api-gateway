@@ -19,7 +19,6 @@ var inventoryItems = &AppConfig{}
 
 func InitAppConfig() (in *AppConfig) {
 	log := logger.NewLogger()
-
 	viper.SetConfigFile("./config.yml")
 	viper.ReadInConfig()
 
