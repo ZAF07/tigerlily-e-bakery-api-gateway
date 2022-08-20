@@ -1,2 +1,6 @@
-paymentServicePort: ":8001"
-inventoryServicePort: ":8000"
+paymentServicePort: "tiger-payment:8001"
+inventoryServicePort: "tiger-inventory:8000"
+
+#  UNCOMMENT FOR LOCAL W/O DOCKER
+# paymentServicePort: ":8001"
+# inventoryServicePort: ":8000"

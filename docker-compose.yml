@@ -1,15 +1,86 @@
 version: '3.9'
 
 services:
+  db:
+    container_name: "tiger-db"
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=tigerguy
+      - POSTGRES_PASSWORD=tigercoders
+      - POSTGRES_DB=tigerlily2
+    ports:
+      - "5431:5432"
+    volumes:
+      - ./.tiger-db:/var/lib/postgresql/data
+      - ~/tiger-coders/tigerlily-inventories/seed.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  
   bff:
+    container_name: tiger-bff
     build:
       dockerfile: Dockerfile
       context: .
       target: dev
     volumes: 
       - .:/opt/tigercoders/bff
-      - ~/.ssh:/root/ssh
+      - ~/.ssh:/root/.ssh
     ports: 
       - "8080:8080"
+
+  inventory:
+    container_name: tiger-inventory
+    build:
+      dockerfile: ../tigerlily-inventories/Dockerfile
+      context: ../tigerlily-inventories
+      target: dev
+    volumes:
+      - ~/tiger-coders/tigerlily-inventories:/opt/tigercoders/inventories
+      - ~/.ssh:/root/.ssh
+    ports:
+      - "8000:8000"
+    # NOT WORKING ON DOCKER UPDATE
+    # depends_on:
+    #   - tiger-db
+
+  payment:
+    container_name: tiger-payment
+    build:
+      dockerfile: ../tigerlily-payment/Dockerfile
+      context: ../tigerlily-payment
+      target: dev
+    volumes:
+      - ~/tiger-coders/tigerlily-payment:/opt/tigercoders/payments
+      - ~/.ssh:/root/.ssh
+    ports:
+      - "8001:8001"
+    # NOT WORKING ON DOCKER UPDATE
+    # depends_on:
+    #   - tiger-db
+
+  app:
+    container_name: tiger-app
+    build:
+      dockerfile: ../tigerlily-bakery/Dockerfile
+      context: ~/tiger-coders/tigerlily-bakery
+      target: dev
+    volumes:
+      - ~/tiger-coders/tigerlily-bakery:/opt/tigercoders/app
+      - /opt/tigercoders/app/node_modules
+    ports:
+      - "3000:3000"
   
+  # db:
+  #   container_name: "tiger-db"
+  #   image: postgres
+  #   # user: tiger
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=tigerguy
+  #     - POSTGRES_PASSWORD=tigercoders
+  #     - POSTGRES_DB=tigerlily2
+  #   ports:
+  #     - "5431:5432"
+  #   volumes:
+  #     - ./.tiger-db:/var/lib/postgresql/data
+  #     - ~/tiger-coders/tigerlily-inventories/seed.sql:/docker-entrypoint-initdb.d/create_tables.sql
     
