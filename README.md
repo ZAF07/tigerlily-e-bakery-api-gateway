@@ -33,7 +33,7 @@ We are following the configuration design from the `Twelve factor app` principle
 All application has its own credentials and it lives outside the app in a config file stored in our secrets repository.
 Our application injects those values into the app during build time and watches those configuration during runtime
 
-> Note: We don't ahve a specific secret repository yet. Service Configurations are passed on manually currently between contributors. Just ask in slack
+> Note: We don't have a specific secret repository yet. Service Configurations are passed on manually currently between contributors. Just ask in slack
 
 ```touch ~/tigercoders/<SERVICE-REPO>/config.yml```
 
