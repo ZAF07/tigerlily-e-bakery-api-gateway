@@ -7,9 +7,9 @@ All requests from the frontend goes through tigerlily-bff, which acts as a middl
 > **IMPORTANT**: Make sure all project repositories are stored locally in a single folder under *$HOME* `~/tigercoders`. his is important for starting all services locally with docker compose later on
 
   **Go version 1.17 https://golang.org/dl/ (Go version 1.17.2 specifically)**
-> Note: You can have multiple Go compiler version installed locally and switch between them during development 
+> Note: You can have multiple versions of the Go compiler installed locally and switch between them during development 
 
-- If you have other Go versions currently active, you'd have to either uninstall it and reinstall Go 1.17.2 or install the 1.17.2 Go compiler and and replace GOPATH env alias
+If you have other Go versions currently active, you'd have to either uninstall it and reinstall Go 1.17.2 or install the 1.17.2 Go compiler and and replace GOPATH env alias
 
 ## Setup
 
