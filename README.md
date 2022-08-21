@@ -23,7 +23,7 @@ Tigerlily-bff is using GOMODULES for dependency management, so the source can be
 In your local machine, run:
   - `mkdir ~/tigercoders`
   - `cd ~/tigercoders`
-  - `git clone git@github.com:Tiger-Coders/tigerlily-bff.git`
+  - `git clone git@github.com:Tiger-Coders/<REPO-NAME>.git`
   > Note: Clone via ssh. Use HTTP if ssh doesn't work
 
 2. Copy the service specific configuration into the specific project
