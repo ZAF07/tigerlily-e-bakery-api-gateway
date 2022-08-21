@@ -1,4 +1,4 @@
-# tigerlily-e-bakery-api-gateway
+# Tigerlily-bff
 
 Tigerlily-bff by definition is the backend for the tigerlily-app (frontend)
 All requests from the frontend goes through tigerlily-bff, which acts as a middleman proxy to all other services
