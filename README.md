@@ -44,7 +44,7 @@ Then paste the configuration into `config.yml`
 
   ## a. Docker Compose ##
 
-  When developing locally, we need more than one service/repo to start in order to test and verify that our changes are valid. Traditionally, we would start all required services manually in a seperate terminal. This requires you having multiple terminal windows and VSC open. It also introduces human error and the need to restart those services upon each code change. 
+  When developing locally, we need more than one service/repo to start in order to test and verify that our changes are valid. Traditionally, we would start all required services manually in a seperate terminal. This requires you having multiple terminal windows and VSC open. This could introduce human errors and the need to restart those services upon each code change. 
 
   Our services requires a couple of external dependencies in order to run. (Postgres & redis at the moment). Installing these dependencies individually in each of our computers takes time and could also risk having them installed with a different breaking verison. If we were to have 10 external dependencies, imagine how much time would be spent debugging dependency errors ... Yikes! 😱😱😱
 
