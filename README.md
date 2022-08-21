@@ -61,7 +61,7 @@ Then paste the configuration into `config.yml`
      
       `docker compose up`
 
-  *Live-Reloading*
+  *Live-Reloading (Golang services only)*
   
   Go being a compiled language means that for each code change, we'd have to stop the running server and recompile our Go binary. This slows down productivity. 
 
