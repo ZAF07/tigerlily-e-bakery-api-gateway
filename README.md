@@ -69,7 +69,7 @@ Then paste the configuration into `config.yml`
   
   *You don't have to recompile the Go binary to see your changes reflected during development* 😉
 
-  For for our frontend application (*tigerlily-app*), we are already making use of *react-scripts start* to allow hot-reloads
+  For for our frontend application (*tigerlily-app*), we are already making use of *react-scripts start* to allow for hot-reloads
 
   ## Without Docker ##
   > Note Currently our work is a little messy. In terms of configuration. So far only *tigerlily-inventory* & *tigerlily-bff* have been migrated to use the `Twelve Factor App` principles. To start *tigerlily-payment*, we have to run `go run main.go` passing in credentials as arguments. We have made it easier by creating a bash script to start each service, so just run that. 
