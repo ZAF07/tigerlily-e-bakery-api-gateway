@@ -61,6 +61,21 @@ Then paste the configuration into `config.yml`
      
       `docker compose up`
 
+  *Postgres in container*
+
+  We are using *postgres's official docker image* for our datastore in the container
+  This one can get a little tricky.. 
+
+  >**IMPORTANT**: If you already have postgres installed locally, be sure to terminate the application first before you run ``docker compose up``
+
+  Local Postgres runs in a **VM**. It can cause your **Container Postgres** to conflict with **Local postgres** while trying to connect from your application in your container. 
+
+  Upon initial start-up, we have a **seed.sql** script to populate the database in the container with default minimal data.
+
+  We have attached a **volume** to ``~/tigercoders/tigerlily-bff/.tiger-db`` so postgres data would persist upon subsequent start-up
+
+  To start with a fresh postgres instance with the minimal dataset, just remove **~/tigercoders/tigerlily-bff/.tiger-db** and run ``docker compose up --build``
+
   *Live-Reloading (Golang services only)*
   
   Go being a compiled language means that for each code change, we'd have to stop the running server and recompile our Go binary. This slows down productivity. 
