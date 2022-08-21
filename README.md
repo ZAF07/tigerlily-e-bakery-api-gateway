@@ -4,7 +4,7 @@ Tigerlily-bff by definition is the backend for the tigerlily-app (frontend)
 All requests from the frontend goes through tigerlily-bff, which acts as a middleman proxy to all other services
 
 ## Prerequisites
-> **IMPORTANT**: Make sure all project repositories are storedd locally in a single folder under $HOME '~/'. his is important for starting all services locally with docker compose later on
+> **IMPORTANT**: Make sure all project repositories are stored locally in a single folder under *$HOME* `~/`. his is important for starting all services locally with docker compose later on
 
 **Go version 1.17 https://golang.org/dl/ (Go version 1.17.2 specifically)**
 > Note: You can have multiple Go compiler version installed locally and switch between them during development 
@@ -16,7 +16,7 @@ All requests from the frontend goes through tigerlily-bff, which acts as a middl
 Tigerlily-bff is using GOMODULES for dependency management, so the source can be placed outside of ``GOPATH/src``
 
 1. Clone the repository from Github
-> **IMPORTANT**: Make sure all project repositories are storedd locally in a single folder under $HOME '~/'. his is important for starting all services locally with docker compose later on
+> **IMPORTANT**: Make sure all project repositories are stored locally in a single directory under *$HOME* `~/`. his is important for starting all services locally with docker compose later on
 
 > Note: Add your `ssh public key` to our github organisation before you begin these steps
 
