@@ -61,7 +61,7 @@ Then paste the configuration into `config.yml`
      
       `docker compose up`
 
-  *Live-Reloading* 
+  *Live-Reloading*
   Go being a compiled language means that for each code change, we'd have to stop the running server and recompile our Go binary. This slows down productivity. 
 
   We are using `air` (https://github.com/cosmtrek/air) for Go live-reload to rebuild and compile upon detecting code changes. 
