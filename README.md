@@ -86,6 +86,15 @@ Then paste the configuration into `config.yml`
 
   For for our frontend application (*tigerlily-app*), we are already making use of *react-scripts start* to allow for hot-reloads
 
+  **Starting & stopping the container**
+  
+  - On initial container start-up run: ``docker compose up -d --build``
+
+  - To stop container, run: ``docker compose stop``
+
+  - On subsequent container start-up run: ``docker compose start`` from **~/tigercoders/tigerlily-bff**
+  
+
   ## Without Docker ##
   > Note Currently our work is a little messy. In terms of configuration. So far only *tigerlily-inventory* & *tigerlily-bff* have been migrated to use the `Twelve Factor App` principles. To start *tigerlily-payment*, we have to run `go run main.go` passing in credentials as arguments. We have made it easier by creating a bash script to start each service, so just run that. 
 
