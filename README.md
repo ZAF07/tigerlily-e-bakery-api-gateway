@@ -50,7 +50,7 @@ Then paste the configuration into `config.yml`
 
   To solve this, and to enable each new contributor to become as productive as soon as possible, we have compiled all services and dependencies into a container. Now all a new contributor has to do in order to start productively contributing is to `install docker` and run `docker compose up`. That simple!! No headaches installing external dependencies and running into errors (Ideally at least.. 😛😛😛) 
 
-  > Note: To start all services locally with Docker compose, make sure you have *docker desktop* installed and that you are in *~/tigercoders/tigerlily-bff* and . This is where the docker-compose services map lives
+  > Note: To start all services locally with Docker compose, make sure you have *docker desktop* installed and that you are in *~/tigercoders/tigerlily-bff*. This is where the docker-compose services map lives
     
     - Change Directory into `~/tigercoders/tigerlily-bff`
     
