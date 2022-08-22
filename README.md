@@ -68,7 +68,10 @@ Then paste the configuration into `config.yml`
 
   >**IMPORTANT**: If you already have postgres installed locally, be sure to terminate the application first before you run ``docker compose up``
 
-  Local Postgres runs in a **VM**. It can cause your **Container Postgres** to conflict with **Local postgres** while trying to connect from your application in your container. 
+  Having Local Postgres running can cause your **Container Postgres** to conflict with **Local postgres** while trying to connect from your application in your container. 
+    Either:
+    - *terminate* local postgres 
+    - change the port mapping for *Container Postgres* (NOT RECOMMENDED)
 
   Upon initial start-up, we have a **seed.sql** script to populate the database in the container with default minimal data.
 
@@ -93,7 +96,7 @@ Then paste the configuration into `config.yml`
   - To stop container, run: ``docker compose stop``
 
   - On subsequent container start-up run: ``docker compose start`` from **~/tigercoders/tigerlily-bff**
-  
+
 
   ## Without Docker ##
   > Note Currently our work is a little messy. In terms of configuration. So far only *tigerlily-inventory* & *tigerlily-bff* have been migrated to use the `Twelve Factor App` principles. To start *tigerlily-payment*, we have to run `go run main.go` passing in credentials as arguments. We have made it easier by creating a bash script to start each service, so just run that. 
