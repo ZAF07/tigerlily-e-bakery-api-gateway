@@ -18,7 +18,12 @@ import (
 func main() {
 	log := logger.NewLogger()
 
-	l, err := net.Listen("tcp", ":8080")
+	// Read inventories from the data file, pass to HTTP goroutine
+	appConfig := config.InitAppConfig()
+
+	port := fmt.Sprintf(":%s", appConfig.ServicePort)
+
+	l, err := net.Listen("tcp", port)
 	if err != nil {
 		log.ErrorLogger.Fatalf("[MAIN] Error connecting tcp port 8080: %+v\n", err)
 	}
@@ -28,9 +33,6 @@ func main() {
 	if cliErr := command.InjectInventoriesCmd.Execute(); cliErr != nil {
 		log.ErrorLogger.Fatalf("Error Executing CLI commands : %+v\n", cliErr)
 	}
-
-	// Read inventories from the data file, pass to HTTP goroutine
-	appConfig := config.InitAppConfig()
 
 	// Start a new multiplexer passing in the main server
 	m := cmux.New(l)
