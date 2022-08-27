@@ -70,8 +70,8 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 
 func (srv InventoryService) GetAllInventoriesCache(ctx context.Context) *rpc.GetAllInventoriesResp {
 
-	srv.logs.InfoLogger.Println("Current inventory item name in local data file -----> ", srv.inventories.Inventories)
-	resp, err := srv.cache.GetAllInventories(ctx, srv.inventories.Inventories)
+	srv.logs.InfoLogger.Println("Current inventory item name in local data file -----> ", srv.inventories.InventoryConfig.Inventories)
+	resp, err := srv.cache.GetAllInventories(ctx, srv.inventories.InventoryConfig.Inventories)
 	if err != nil {
 		srv.logs.ErrorLogger.Printf(" [SERVICE] Error getting from cache library: %+v\n", err)
 	}

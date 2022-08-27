@@ -30,7 +30,7 @@ func InjectInventoryItems(cmd *cobra.Command, args []string) {
 		singleItem := &rpc.Sku{
 			Name: v,
 		}
-		inventories.Inventories = append(inventories.Inventories, singleItem)
+		inventories.Inventories.Inventories = append(inventories.Inventories.Inventories, singleItem)
 	}
 
 	b, err := json.Marshal(inventories)

@@ -8,15 +8,16 @@ import (
 )
 
 type AppConfig struct {
-	Inventories          []*rpc.Sku
-	PaymentServicePort   string
-	InventoryServicePort string
-	ServicePort          string
+	// Inventories          []*rpc.Sku `mapstructure:"inventories"`
+	InventoryConfig      *InventoryConfig `mapstructure:"inventory_config"`
+	PaymentServicePort   string           `mapstructure:"payment_service_port"`
+	InventoryServicePort string           `mapstructure:"inventory_service_port"`
+	ServicePort          string           `mapstructure:"service_port"`
 }
 
-type TestConfig struct {
-	Name string
-	Age  int
+type InventoryConfig struct {
+	FilePath    string     `mapstructure:"inventory_file_path"`
+	Inventories []*rpc.Sku `mapstructure:"inventories"`
 }
 
 func InitAppConfig() (in *AppConfig) {
@@ -25,7 +26,7 @@ func InitAppConfig() (in *AppConfig) {
 	var appConfiguration = &AppConfig{}
 
 	loadFromConfigFile("./config.yml", appConfiguration, *logger)
-	loadFromConfigFile("./inventory.yml", appConfiguration, *logger)
+	loadFromConfigFile(appConfiguration.InventoryConfig.FilePath, appConfiguration, *logger)
 
 	return appConfiguration
 }

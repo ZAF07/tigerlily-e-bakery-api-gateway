@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/Tiger-Coders/tigerlily-bff/api/rest/router"
-	"github.com/Tiger-Coders/tigerlily-bff/command"
 	"github.com/Tiger-Coders/tigerlily-bff/config"
 	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
 	"github.com/gin-gonic/gin"
@@ -30,9 +29,9 @@ func main() {
 
 	// ❌ NOT USED. THIS CAN BE DELETED. USED THIS TO MANUALLY CREATE A CONFIG FILE FOR INVENTORIES VIA THE CLI
 	// Inject inventories into data file
-	if cliErr := command.InjectInventoriesCmd.Execute(); cliErr != nil {
-		log.ErrorLogger.Fatalf("Error Executing CLI commands : %+v\n", cliErr)
-	}
+	// if cliErr := command.InjectInventoriesCmd.Execute(); cliErr != nil {
+	// 	log.ErrorLogger.Fatalf("Error Executing CLI commands : %+v\n", cliErr)
+	// }
 
 	// Start a new multiplexer passing in the main server
 	m := cmux.New(l)
