@@ -43,7 +43,7 @@ func (g GRPCInventoryClient) getAllInventories(ctx context.Context, req interfac
 
 	resp, err = g.Client.GetAllInventories(ctx, r)
 	if err != nil {
-		g.logs.ErrorLogger.Printf("[GRPC_MANAGER] Error receiving response from Inventry Service: %+v", err)
+		g.logs.ErrorLogger.Printf("[GRPC_MANAGER] Error receiving response from Inventory Service: %+v", err)
 	}
 	return
 }

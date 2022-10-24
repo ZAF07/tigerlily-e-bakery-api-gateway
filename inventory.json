@@ -10,6 +10,6 @@
       "name": "lemon tart"
     }
   ],
-  "paymentServicePort": ":8001",
-  "InventoryServicePort": ":8000"
+  "paymentServicePort": "localhost:8001",
+  "InventoryServicePort": "localhost:8000"
 }
