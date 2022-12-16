@@ -1,15 +1,1 @@
-{
-  "Inventories":[
-    {
-      "name":"egg tart"
-    },
-    {
-      "name":"cheese pie"
-    },
-    {
-      "name": "lemon tart"
-    }
-  ],
-  "paymentServicePort": "localhost:8001",
-  "InventoryServicePort": "localhost:8000"
-}
+{"Inventories":[{"name":"GODEBUG=http2debug=2"}],"PaymentServicePort":"","InventoryServicePort":":8000"}

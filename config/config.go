@@ -13,6 +13,20 @@ type AppConfig struct {
 	Inventories          []*rpc.Sku
 	PaymentServicePort   string
 	InventoryServicePort string
+
+	Port             string           `mapstructure:"port" json:"port"`
+	InventoryService InventoryService `mapstructure:"inventory_service" json:"inventory_service"`
+}
+
+type InventoryService struct {
+	Port      string `mapstructure:"port" json:"port"`
+	Method    string `mapstructure:"method" json:"method"`
+	KeepAlive `mapstructure:"keepalive" json:"keepalive"`
+}
+
+type KeepAlive struct {
+	MaxConnAge   int `mapstructure:"max_conn_age"`
+	MaxConnGrace int `mapstructure:"max_conn_grace" json:"max_conn_grace"`
 }
 
 func InitInventoryConfig() (in *AppConfig) {

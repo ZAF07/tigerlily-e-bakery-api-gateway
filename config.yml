@@ -1,0 +1,9 @@
+port: 8080
+
+inventory_service:
+  port: 8000
+  method: GRPC
+  keepalive: 
+    max_conn_age: 10
+    max_conn_grace: 30
+   
