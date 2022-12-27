@@ -1,1 +1,1 @@
-{"Inventories":[{"name":"GODEBUG=http2debug=2"}],"PaymentServicePort":"","InventoryServicePort":":8000"}
+{"Inventories":[{"name":"GODEBUG=http2debug=2"}],"PaymentServicePort":":8001","InventoryServicePort":":8000"}
