@@ -34,13 +34,13 @@ services:
       context: ../tigerlily-inventories
       target: dev
     volumes:
-      - ~/tiger-coders/tigerlily-inventories:/opt/tigercoders/inventories
+      - ~/tigercoders/tigerlily-inventories:/opt/tigercoders/inventories
       - ~/.ssh:/root/.ssh
     ports:
       - "8000:8000"
-    # NOT WORKING ON DOCKER UPDATE
-    # depends_on:
-    #   - tiger-db
+    # NOT WORKING ON DOCKER UPDATE; TODO: LATEST UPDATE(2024) SEEMS TO BE WORKING NOW
+    depends_on:
+      - db
 
   payment:
     container_name: tiger-payment
@@ -49,25 +49,26 @@ services:
       context: ../tigerlily-payment
       target: dev
     volumes:
-      - ~/tiger-coders/tigerlily-payment:/opt/tigercoders/payments
+      - ~/tigercoders/tigerlily-payment:/opt/tigercoders/payments
       - ~/.ssh:/root/.ssh
     ports:
       - "8001:8001"
     # NOT WORKING ON DOCKER UPDATE
-    # depends_on:
-    #   - tiger-db
+    depends_on:
+      - db
 
-  app:
-    container_name: tiger-app
-    build:
-      dockerfile: ../tigerlily-bakery/Dockerfile
-      context: ~/tiger-coders/tigerlily-bakery
-      target: dev
-    volumes:
-      - ~/tiger-coders/tigerlily-bakery:/opt/tigercoders/app
-      - /opt/tigercoders/app/node_modules
-    ports:
-      - "3000:3000"
+  # app:
+  #   container_name: tiger-app
+  #   build:
+  #     dockerfile: ../tigerlily-bakery/Dockerfile
+  #     # context: ~/tiger-coders/tigerlily-bakery
+  #     context: ../tigerlily-bakery
+  #     target: dev
+  #   volumes:
+  #     - ~/tiger-coders/tigerlily-bakery:/opt/tigercoders/app
+  #     - /opt/tigercoders/app/node_modules
+  #   ports:
+  #     - "3000:3000"
   
   # db:
   #   container_name: "tiger-db"
