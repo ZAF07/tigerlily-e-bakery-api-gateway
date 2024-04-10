@@ -64,7 +64,9 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	*/
 	// Create an empty context to pass to the service layer (can pass metadata via this channel)
 	ctx := context.Background()
-	grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryServicePort)
+	log.Printf("CONFIGS ---> , %+v", controller.appConfig)
+	// grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryServicePort)
+	grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryService.Port)
 	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient, controller.rdb, controller.appConfig)
 
 	resp, err := service.GetAllInventories(ctx, req)

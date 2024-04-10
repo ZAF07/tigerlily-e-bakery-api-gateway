@@ -9,3 +9,4 @@ inventory_config:
 # payment_service_port: ":8001"
 # inventory_service_port: ":8000"
 # service_port: "8080"
+

@@ -25,6 +25,7 @@ func NewGRPCCheckoutClient(conn *grpc.ClientConn) *GRPCCheckoutClient {
 	}
 }
 
+//  Execute() checks the given params and decides which payment strategy to execute
 func (g GRPCCheckoutClient) Execute(ctx context.Context, _type, req interface{}) (resp interface{}, err error) {
 	switch _type {
 	case constants.STRIPE_CHECKOUT_SESSION:

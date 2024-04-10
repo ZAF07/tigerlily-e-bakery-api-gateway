@@ -122,3 +122,6 @@ Then paste the configuration into `config.yml`
 
 ![Tigerlily Project (1)](https://user-images.githubusercontent.com/61228520/171108925-ee16476a-a3d5-4ac0-9a4a-278455a95f93.png)
 
+<h2>Updated Architecture Diagram with Frontend</h2>
+
+![Tigerlily Project (6)](https://user-images.githubusercontent.com/61228520/211194569-5a9c2431-a3d4-441c-a90b-6dda39bcd3b7.png)
