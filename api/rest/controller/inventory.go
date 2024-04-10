@@ -2,17 +2,18 @@ package controller
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/cache"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/cache"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/manager/grpc_client"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/constants"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/service/inventory"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 	"github.com/go-redis/redis/v9"
 
 	"github.com/gin-gonic/gin"
@@ -87,6 +88,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 }
 
 func (controller InventoryApi) GetAllInventoriesCache(c *gin.Context) {
+	fmt.Println("YESSSS")
 	controller.logs.InfoLogger.Println("Request for GetAllInventoriesCache")
 	service := inventory.NewInventoryService(controller.hubb, grpc_client.NewGRPCClient(constants.INVENTORY_PORT), controller.rdb, controller.appConfig)
 

@@ -6,9 +6,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 )
 
 var InjectInventoriesCmd = &cobra.Command{
@@ -30,7 +30,7 @@ func InjectInventoryItems(cmd *cobra.Command, args []string) {
 		singleItem := &rpc.Sku{
 			Name: v,
 		}
-		inventories.Inventories = append(inventories.Inventories, singleItem)
+		inventories.Inventories.Inventories = append(inventories.Inventories.Inventories, singleItem)
 	}
 
 	b, err := json.Marshal(inventories)

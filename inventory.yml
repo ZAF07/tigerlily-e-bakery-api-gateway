@@ -1,0 +1,5 @@
+inventory_config:
+  inventories:
+    - name: "lemon tart"
+    - name: "egg tart"
+    - name: "cheese pie"

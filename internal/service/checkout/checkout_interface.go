@@ -3,7 +3,7 @@ package checkout
 import (
 	"context"
 
-	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-payment/api/rpc"
 )
 
 type CheckotService interface {

@@ -13,7 +13,7 @@ import (
 	"github.com/gorilla/websocket"
 	"google.golang.org/grpc"
 
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 )
 
 const (

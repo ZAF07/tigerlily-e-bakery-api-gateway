@@ -1,54 +1,47 @@
 package config
 
 import (
-	"fmt"
-
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
 
 type AppConfig struct {
-	Inventories          []*rpc.Sku
-	PaymentServicePort   string
-	InventoryServicePort string
-
-	Port             string           `mapstructure:"port" json:"port"`
-	InventoryService InventoryService `mapstructure:"inventory_service" json:"inventory_service"`
+	// Inventories          []*rpc.Sku `mapstructure:"inventories"`
+	InventoryConfig      *InventoryConfig `mapstructure:"inventory_config"`
+	PaymentServicePort   string           `mapstructure:"payment_service_port"`
+	InventoryServicePort string           `mapstructure:"inventory_service_port"`
+	ServicePort          string           `mapstructure:"service_port"`
 }
 
-type InventoryService struct {
-	Port      string `mapstructure:"port" json:"port"`
-	Method    string `mapstructure:"method" json:"method"`
-	KeepAlive `mapstructure:"keepalive" json:"keepalive"`
+type InventoryConfig struct {
+	FilePath    string     `mapstructure:"inventory_file_path"`
+	Inventories []*rpc.Sku `mapstructure:"inventories"`
 }
 
-type KeepAlive struct {
-	MaxConnAge   int `mapstructure:"max_conn_age"`
-	MaxConnGrace int `mapstructure:"max_conn_grace" json:"max_conn_grace"`
+func InitAppConfig() (in *AppConfig) {
+	logger := logger.NewLogger()
+
+	var appConfiguration = &AppConfig{}
+
+	loadFromConfigFile("./config.yml", appConfiguration, *logger)
+	loadFromConfigFile(appConfiguration.InventoryConfig.FilePath, appConfiguration, *logger)
+
+	return appConfiguration
 }
 
-func InitInventoryConfig() (in *AppConfig) {
-	log := logger.NewLogger()
-	inventoryItems := &AppConfig{}
-	viper.AddConfigPath("./")
-	viper.SetConfigName("inventory")
-	viper.SetConfigType("json")
-	viper.ReadInConfig()
-	a := viper.Get("Payment_service_port")
-	fmt.Println("HERE _ >", a)
-	if err := viper.Unmarshal(inventoryItems); err != nil {
-		log.ErrorLogger.Println("[CONFIG] Error unmarshaling data from JSON file : ", err)
-	}
-	fmt.Printf("CONFIG : %+v", inventoryItems)
-	viper.WatchConfig()
-	viper.OnConfigChange(func(e fsnotify.Event) {
-		log.InfoLogger.Println("[CONFIG] Config has changed: ", e.Name)
-		if err := viper.Unmarshal(inventoryItems); err != nil {
-			log.ErrorLogger.Panicf("[CONFIG] Error unmarshaling onchange : %+v\n", err)
+func loadFromConfigFile(filepath string, config *AppConfig, logger logger.Logger) {
+	cfgLoader := viper.New()
+	cfgLoader.SetConfigFile(filepath)
+	cfgLoader.ReadInConfig()
+	cfgLoader.Unmarshal(config)
+
+	cfgLoader.WatchConfig()
+	cfgLoader.OnConfigChange(func(e fsnotify.Event) {
+		logger.InfoLogger.Printf("[CONFIG] %+v has changed. FilePath: : %s", e.Name, filepath)
+		if err := viper.Unmarshal(config); err != nil {
+			logger.ErrorLogger.Panicf("[CONFIG] Error unmarshaling %s Config on change : %+v\n", filepath, err)
 		}
 	})
-
-	return inventoryItems
 }

@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/api/rest/controller"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	i "github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/service/inventory"
+	"github.com/Tiger-Coders/tigerlily-bff/api/rest/controller"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	i "github.com/Tiger-Coders/tigerlily-bff/internal/service/inventory"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )

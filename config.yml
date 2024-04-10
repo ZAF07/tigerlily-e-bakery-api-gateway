@@ -1,9 +1,12 @@
-port: 8080
+payment_service_port: "tiger-payment:8001"
+inventory_service_port: "tiger-inventory:8000"
+service_port: "8080"
 
-inventory_service:
-  port: 8000
-  method: GRPC
-  keepalive: 
-    max_conn_age: 10
-    max_conn_grace: 30
-   
+inventory_config: 
+  inventory_file_path: "./inventory.yml"
+
+#  UNCOMMENT FOR LOCAL W/O DOCKER
+# payment_service_port: ":8001"
+# inventory_service_port: ":8000"
+# service_port: "8080"
+

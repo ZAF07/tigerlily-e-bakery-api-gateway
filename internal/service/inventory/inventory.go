@@ -7,13 +7,13 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/config"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/helper"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/constants"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	rm "github.com/ZAF07/tigerlily-e-bakery-cache/redis-cache-manager"
-	"github.com/ZAF07/tigerlily-e-bakery-inventories/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-bff/config"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/helper"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/manager/grpc_client"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/constants"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	rm "github.com/Tiger-Coders/tigerlily-cache/redis-cache-manager"
+	"github.com/Tiger-Coders/tigerlily-inventories/api/rpc"
 	"github.com/go-redis/redis/v9"
 )
 
@@ -70,8 +70,8 @@ func (srv InventoryService) GetAllInventories(ctx context.Context, req *rpc.GetA
 
 func (srv InventoryService) GetAllInventoriesCache(ctx context.Context) *rpc.GetAllInventoriesResp {
 
-	srv.logs.InfoLogger.Println("Current inventory item name in local data file -----> ", srv.inventories.Inventories)
-	resp, err := srv.cache.GetAllInventories(ctx, srv.inventories.Inventories)
+	srv.logs.InfoLogger.Println("Current inventory item name in local data file -----> ", srv.inventories.InventoryConfig.Inventories)
+	resp, err := srv.cache.GetAllInventories(ctx, srv.inventories.InventoryConfig.Inventories)
 	if err != nil {
 		srv.logs.ErrorLogger.Printf(" [SERVICE] Error getting from cache library: %+v\n", err)
 	}

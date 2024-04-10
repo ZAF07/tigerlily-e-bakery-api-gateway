@@ -4,9 +4,9 @@ import (
 	"context"
 	"net/http"
 
-	wsClient "github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/websocket-client"
+	wsClient "github.com/Tiger-Coders/tigerlily-bff/internal/manager/websocket-client"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
 )
 
 type SyncInventoryService struct {

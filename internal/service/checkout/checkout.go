@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/helper"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/manager/grpc_client"
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
-	"github.com/ZAF07/tigerlily-e-bakery-payment/api/rpc"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/helper"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/manager/grpc_client"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-payment/api/rpc"
 )
 
 type CheckoutService struct {

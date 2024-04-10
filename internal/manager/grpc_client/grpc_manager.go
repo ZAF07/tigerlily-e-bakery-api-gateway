@@ -3,7 +3,7 @@ package grpc_client
 import (
 	"log"
 
-	"github.com/ZAF07/tigerlily-e-bakery-api-gateway/internal/pkg/logger"
+	"github.com/Tiger-Coders/tigerlily-bff/internal/pkg/logger"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
