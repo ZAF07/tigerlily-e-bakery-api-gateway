@@ -66,7 +66,7 @@ func (controller InventoryApi) GetAllInventories(c *gin.Context) {
 	ctx := context.Background()
 	log.Printf("CONFIGS ---> , %+v", controller.appConfig)
 	// grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryServicePort)
-	grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryService.Port)
+	grpcClient := grpc_client.NewGRPCClient(controller.appConfig.InventoryServicePort)
 	service := inventory.NewInventoryService(&inventory.Hub{}, grpcClient, controller.rdb, controller.appConfig)
 
 	resp, err := service.GetAllInventories(ctx, req)

@@ -1,5 +1,6 @@
 package command
 
+// TODO: Can delete this package. Not used anymore. Used it before to manually inject inventory items into the app using CLI tool
 import (
 	"encoding/json"
 	"os"
