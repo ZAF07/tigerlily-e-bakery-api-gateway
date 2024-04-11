@@ -13,7 +13,7 @@ services:
       - "5431:5432"
     volumes:
       - ./.tiger-db:/var/lib/postgresql/data
-      - ~/tiger-coders/tigerlily-inventories/seed.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ~/tigercoders/tigerlily-inventories/seed.sql:/docker-entrypoint-initdb.d/create_tables.sql
   
   bff:
     container_name: tiger-bff
