@@ -19,7 +19,7 @@ func NewGRPCClient(port string) *GRPCClient {
 	conn, connErr := grpc.Dial(port, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if connErr != nil {
 		logs := logger.NewLogger()
-		logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server")
+		logs.ErrorLogger.Printf(" [SERVICE] Cannot connect to GRPC server; error: %+v", connErr)
 		log.Fatalf("cannot connect to GRPC server: %+v", connErr)
 	}
 

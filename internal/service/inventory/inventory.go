@@ -26,8 +26,8 @@ type InventoryService struct {
 }
 
 /*
-	TODO:
-	Create another NewInventoryService W/O a hub
+TODO:
+Create another NewInventoryService W/O a hub
 */
 func NewInventoryService(h *Hub, grpc *grpc_client.GRPCClient, r *redis.Client, invs *config.AppConfig) *InventoryService {
 	return &InventoryService{
